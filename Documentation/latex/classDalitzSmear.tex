@@ -1,0 +1,163 @@
+\section{Dalitz\-Smear Class Reference}
+\label{classDalitzSmear}\index{DalitzSmear@{DalitzSmear}}
+Class that takes in a 4vector and smears it, each vector both smeared and unsmeared is stored locally, and the class requires the particle id to be seperately supplied to the class (where it is also stored locally).  
+
+
+{\tt \#include $<$Dalitz\-Smear.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+void \bf{setpid} (int id)
+\begin{CompactList}\small\item\em Method to set the particle ID. \item\end{CompactList}\item 
+\bf{Dalitz\-Smear} ()
+\begin{CompactList}\small\item\em Empty constructor. \item\end{CompactList}\item 
+\bf{Dalitz\-Smear} (TLorentz\-Vector v, int classifier)
+\begin{CompactList}\small\item\em Constructor that sets the 4 vector to be smeared, and the particle ID associated with the 4 vector, highly recommended to use this constructor over the empty version. \item\end{CompactList}\item 
+TLorentz\-Vector \bf{Smear\-Vector} ()
+\begin{CompactList}\small\item\em Method that smears a 4 vector $\ast$NOTE$\ast$ v\_\-reg and pid global variables must already be set. \item\end{CompactList}\item 
+TLorentz\-Vector \bf{Smear\-Vector} (TLorentz\-Vector v)
+\begin{CompactList}\small\item\em Method that smears the argument 4 vector $\ast$NOTE$\ast$ the particle ID must be set before calling this method. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+TRandom1 $\ast$ \bf{RNG}
+\begin{CompactList}\small\item\em Local copy of random number generator used for generating gaussian values. \item\end{CompactList}\item 
+TLorentz\-Vector \bf{v\_\-reg}
+\begin{CompactList}\small\item\em Locally stored 4 vector which is unsmeared. \item\end{CompactList}\item 
+TLorentz\-Vector \bf{v\_\-sme}
+\begin{CompactList}\small\item\em Locally stored 4 vector which is the smeared version of v\_\-reg. \item\end{CompactList}\item 
+double \bf{q}
+\begin{CompactList}\small\item\em Charge, used only electron(-1) and positron(+1). \item\end{CompactList}\item 
+int \bf{pid}
+\begin{CompactList}\small\item\em The local particle ID associated with the current copy of v\_\-reg. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Private Member Functions}
+\begin{CompactItemize}
+\item 
+double \bf{get\-Ptsm} (TLorentz\-Vector v)
+\begin{CompactList}\small\item\em Function that returns the smeared values for Pt, which is used for smearing each component of the v\_\-reg vector. \item\end{CompactList}\item 
+double \bf{get\-Gauss} (TLorentz\-Vector v)
+\begin{CompactList}\small\item\em Generates a random gaussian value for the input vector. If the associated particle ID is an electron or positron the gaussian mean is the curvature of the particle with its associated sigma. If the associated partice ID is a photon the gaussian mean is the measured photon energy with its associated sigma. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Class that takes in a 4vector and smears it, each vector both smeared and unsmeared is stored locally, and the class requires the particle id to be seperately supplied to the class (where it is also stored locally). 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{DalitzSmear@{Dalitz\-Smear}!DalitzSmear@{DalitzSmear}}
+\index{DalitzSmear@{DalitzSmear}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Dalitz\-Smear::Dalitz\-Smear ()}\label{classDalitzSmear_ee03f5d7721abecd419ec687c392a080}
+
+
+Empty constructor. 
+
+\index{DalitzSmear@{Dalitz\-Smear}!DalitzSmear@{DalitzSmear}}
+\index{DalitzSmear@{DalitzSmear}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Dalitz\-Smear::Dalitz\-Smear (TLorentz\-Vector {\em v}, int {\em classifier})}\label{classDalitzSmear_d76d70d15e07a9264c54a6052458e4d9}
+
+
+Constructor that sets the 4 vector to be smeared, and the particle ID associated with the 4 vector, highly recommended to use this constructor over the empty version. 
+
+
+
+\subsection{Member Function Documentation}
+\index{DalitzSmear@{Dalitz\-Smear}!getGauss@{getGauss}}
+\index{getGauss@{getGauss}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Dalitz\-Smear::get\-Gauss (TLorentz\-Vector {\em v})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_18fa31b26891f1138adff5dea3a8f558}
+
+
+Generates a random gaussian value for the input vector. If the associated particle ID is an electron or positron the gaussian mean is the curvature of the particle with its associated sigma. If the associated partice ID is a photon the gaussian mean is the measured photon energy with its associated sigma. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]The input \char`\"{}v\_\-reg\char`\"{} 4 vector \end{description}
+\end{Desc}
+\index{DalitzSmear@{Dalitz\-Smear}!getPtsm@{getPtsm}}
+\index{getPtsm@{getPtsm}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Dalitz\-Smear::get\-Ptsm (TLorentz\-Vector {\em v})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_811ae82c27b64f7049a3844148348cc9}
+
+
+Function that returns the smeared values for Pt, which is used for smearing each component of the v\_\-reg vector. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]The input \char`\"{}v\_\-reg\char`\"{} 4 vector \end{description}
+\end{Desc}
+\index{DalitzSmear@{Dalitz\-Smear}!setpid@{setpid}}
+\index{setpid@{setpid}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Dalitz\-Smear::setpid (int {\em id})}\label{classDalitzSmear_63e8f796d9c84111327341c3eefec43a}
+
+
+Method to set the particle ID. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em id}]the particle ID associated with the 4 vector that is intended to be smeared \end{description}
+\end{Desc}
+\index{DalitzSmear@{Dalitz\-Smear}!SmearVector@{SmearVector}}
+\index{SmearVector@{SmearVector}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector Dalitz\-Smear::Smear\-Vector (TLorentz\-Vector {\em v})}\label{classDalitzSmear_ae475bf2bea39d1ff580ad0e3ddaa71a}
+
+
+Method that smears the argument 4 vector $\ast$NOTE$\ast$ the particle ID must be set before calling this method. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]The 4vector smearing target \end{description}
+\end{Desc}
+\index{DalitzSmear@{Dalitz\-Smear}!SmearVector@{SmearVector}}
+\index{SmearVector@{SmearVector}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector Dalitz\-Smear::Smear\-Vector ()}\label{classDalitzSmear_2461cb6cfeb9885b9fe9ac1c7992a814}
+
+
+Method that smears a 4 vector $\ast$NOTE$\ast$ v\_\-reg and pid global variables must already be set. 
+
+
+
+\subsection{Member Data Documentation}
+\index{DalitzSmear@{Dalitz\-Smear}!pid@{pid}}
+\index{pid@{pid}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int \bf{Dalitz\-Smear::pid}}\label{classDalitzSmear_c7fd2ffdba0c574177bd5d6de605d7e5}
+
+
+The local particle ID associated with the current copy of v\_\-reg. 
+
+\index{DalitzSmear@{Dalitz\-Smear}!q@{q}}
+\index{q@{q}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double \bf{Dalitz\-Smear::q}}\label{classDalitzSmear_963895d9a71287579aaa90087c607081}
+
+
+Charge, used only electron(-1) and positron(+1). 
+
+\index{DalitzSmear@{Dalitz\-Smear}!RNG@{RNG}}
+\index{RNG@{RNG}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TRandom1$\ast$ \bf{Dalitz\-Smear::RNG}}\label{classDalitzSmear_bfb2d568818dbaa7db9936a52bd9c079}
+
+
+Local copy of random number generator used for generating gaussian values. 
+
+\index{DalitzSmear@{Dalitz\-Smear}!v_reg@{v\_\-reg}}
+\index{v_reg@{v\_\-reg}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector \bf{Dalitz\-Smear::v\_\-reg}}\label{classDalitzSmear_9340d830c97814a02c2b2749e924abc8}
+
+
+Locally stored 4 vector which is unsmeared. 
+
+\index{DalitzSmear@{Dalitz\-Smear}!v_sme@{v\_\-sme}}
+\index{v_sme@{v\_\-sme}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector \bf{Dalitz\-Smear::v\_\-sme}}\label{classDalitzSmear_87df42c7420bd96bcd61ce25d10ec6ed}
+
+
+Locally stored 4 vector which is the smeared version of v\_\-reg. 
+
+
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+/home/justin/work/Single\-Particle\-Generator/dalitz\_\-decay/dalitz\_\-chisq/Smearing/\bf{Dalitz\-Smear.h}\end{CompactItemize}

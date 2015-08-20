@@ -1,0 +1,6 @@
+LIBS=`root-config --libs`
+CFLAGS=`root-config --cflags`
+CC=g++
+
+all : DalitzSmear.cpp
+	$(CC) DalitzSmear.cpp -o smear $(LIBS) $(CFLAGS)

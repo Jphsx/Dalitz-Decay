@@ -1,0 +1,206 @@
+\section{math\-Utility Namespace Reference}
+\label{namespacemathUtility}\index{mathUtility@{mathUtility}}
+Namespace that combines all the common Dalitz Math Utilities overloaded to support multiple class usage e.g. finding variances or angular quantities of vectors.  
+
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+double \bf{get\-Variance} (\bf{p\-Object} p)
+\begin{CompactList}\small\item\em Given a particle struct with a defined particle ID, this function returns the variance of that particle's measured curvature if it is a photon or electron, or the variance of the measured energy of the photon. Based on the assumption that the collider is cylindrical. \item\end{CompactList}\item 
+double \bf{get\-Variance} (TLorentz\-Vector v, int pid)
+\begin{CompactList}\small\item\em Returns the variance of the input vector with a previously class defined particle ID. Same variance definition as the \doxyref{Dalitz\-Chi\-Sq}{p.}{classDalitzChiSq} class. Used solely for finding the sigmas for gaussian number generation. \item\end{CompactList}\item 
+double \bf{get\-Variance} (int p\-ID, double xm, double theta)
+\begin{CompactList}\small\item\em Returns the variance of particle based on the arguments given, 11,-11 will give a variance electron positron curvature and 22 will get the variance on the photon energy. The variances are calculated based on the x value given. This function is overloaded to get uncertainties on measured values based on x values that come from fitting. \item\end{CompactList}\item 
+double \bf{get\-Z12} (\bf{p\-Object} p1, \bf{p\-Object} p2)
+\begin{CompactList}\small\item\em Evaluates a function based on the opening angle between the positron and electron, used for evaluating the Energy of the photon in the event in terms of x1, x2 and the pion mass constraint. \item\end{CompactList}\item 
+double \bf{get\-Z23} (\bf{p\-Object} p2, \bf{p\-Object} p3)
+\begin{CompactList}\small\item\em Evaluates a function based on the opening angle between the photon and electron, used for evaluating the Energy of the photon in the event in terms of x1, x2 and the pion mass constraint. \item\end{CompactList}\item 
+double \bf{get\-Z13} (\bf{p\-Object} p1, \bf{p\-Object} p3)
+\begin{CompactList}\small\item\em Evaluates a function based on the opening angle between the positron and photon, used for evaluating the Energy of the photon in the event in terms of x1, x2 and the pion mass constraint. \item\end{CompactList}\item 
+double \bf{get\-Cos\-Theta} (TLorentz\-Vector v1, TLorentz\-Vector v2)
+\begin{CompactList}\small\item\em A function that calculates the opening angle between two vectors v1 and v2. \item\end{CompactList}\item 
+double \bf{get\-Theta} (TLorentz\-Vector v)
+\begin{CompactList}\small\item\em Function that gets the polar angle of the pz/p. \item\end{CompactList}\item 
+double \bf{get\_\-p} (TLorentz\-Vector v)
+\begin{CompactList}\small\item\em Calculates the scalar magnitude of the input vector v. \item\end{CompactList}\item 
+double \bf{get\-Phi} (TLorentz\-Vector v)
+\begin{CompactList}\small\item\em Calculates the azimuthal angle of the input vector v. \item\end{CompactList}\item 
+double \bf{get\-Pt} (TLorentz\-Vector v)
+\begin{CompactList}\small\item\em Function that gets the scalar magnitude of the x and y components of an input 4vector. \item\end{CompactList}\item 
+double \bf{get\-X3constrained} (double x1, double x2, \bf{p\-Object} p1, \bf{p\-Object} p2, \bf{p\-Object} p3)
+\begin{CompactList}\small\item\em A function that evaluates the energy of the photon in the event in terms of the positron and electron curvatures, angles between the particles and uses the pion mass constraint. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Variables}
+\begin{CompactItemize}
+\item 
+const double \bf{M} = 0.13497
+\item 
+const double \bf{m\_\-e} = 0.000511
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Namespace that combines all the common Dalitz Math Utilities overloaded to support multiple class usage e.g. finding variances or angular quantities of vectors. 
+
+\subsection{Function Documentation}
+\index{mathUtility@{math\-Utility}!getVariance@{getVariance}}
+\index{getVariance@{getVariance}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-Variance (\bf{p\-Object} {\em p})}\label{namespacemathUtility_4dc7410a0fb1ec53e669ef0f8ae71aaa}
+
+
+Given a particle struct with a defined particle ID, this function returns the variance of that particle's measured curvature if it is a photon or electron, or the variance of the measured energy of the photon. Based on the assumption that the collider is cylindrical. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em p}]a valid particle struct with a defined particle ID \end{description}
+\end{Desc}
+\index{mathUtility@{math\-Utility}!getVariance@{getVariance}}
+\index{getVariance@{getVariance}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-Variance (TLorentz\-Vector {\em v}, int {\em pid})}\label{namespacemathUtility_bf4e07a31d4da17cbddd4942f5cec327}
+
+
+Returns the variance of the input vector with a previously class defined particle ID. Same variance definition as the \doxyref{Dalitz\-Chi\-Sq}{p.}{classDalitzChiSq} class. Used solely for finding the sigmas for gaussian number generation. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]The input \char`\"{}v\_\-reg\char`\"{} 4 vector \end{description}
+\end{Desc}
+\index{mathUtility@{math\-Utility}!getVariance@{getVariance}}
+\index{getVariance@{getVariance}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-Variance (int {\em p\-ID}, double {\em xm}, double {\em theta})}\label{namespacemathUtility_a9948a37d464e8f7136890c75d5554ac}
+
+
+Returns the variance of particle based on the arguments given, 11,-11 will give a variance electron positron curvature and 22 will get the variance on the photon energy. The variances are calculated based on the x value given. This function is overloaded to get uncertainties on measured values based on x values that come from fitting. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em p\-ID}]the particle ID \item[{\em xm}]the measured x value (xfit is the intended use)  the polar angle of the particle with respect to the z axis in the accelerator \end{description}
+\end{Desc}
+\index{mathUtility@{math\-Utility}!getZ12@{getZ12}}
+\index{getZ12@{getZ12}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-Z12 (\bf{p\-Object} {\em p1}, \bf{p\-Object} {\em p2})}\label{namespacemathUtility_36b379bf444fe94e782817c45658945c}
+
+
+Evaluates a function based on the opening angle between the positron and electron, used for evaluating the Energy of the photon in the event in terms of x1, x2 and the pion mass constraint. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em p1}]the particle struct for the positron \item[{\em p2}]the particle struct for the electron \end{description}
+\end{Desc}
+\index{mathUtility@{math\-Utility}!getZ23@{getZ23}}
+\index{getZ23@{getZ23}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-Z23 (\bf{p\-Object} {\em p2}, \bf{p\-Object} {\em p3})}\label{namespacemathUtility_060d92e0729e065c300b759bf55c1ea7}
+
+
+Evaluates a function based on the opening angle between the photon and electron, used for evaluating the Energy of the photon in the event in terms of x1, x2 and the pion mass constraint. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em p2}]the particle struct for the electron \item[{\em p3}]the particle struct for the photon \end{description}
+\end{Desc}
+\index{mathUtility@{math\-Utility}!getZ13@{getZ13}}
+\index{getZ13@{getZ13}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-Z13 (\bf{p\-Object} {\em p1}, \bf{p\-Object} {\em p3})}\label{namespacemathUtility_0cbaaf060ee289aab72880d49b478790}
+
+
+Evaluates a function based on the opening angle between the positron and photon, used for evaluating the Energy of the photon in the event in terms of x1, x2 and the pion mass constraint. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em p1}]the particle struct for the positron \item[{\em p3}]the particle struct for the photon \end{description}
+\end{Desc}
+\index{mathUtility@{math\-Utility}!getCosTheta@{getCosTheta}}
+\index{getCosTheta@{getCosTheta}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-Cos\-Theta (TLorentz\-Vector {\em v1}, TLorentz\-Vector {\em v2})}\label{namespacemathUtility_ffc66d5edd75953a2e69b0a463520875}
+
+
+A function that calculates the opening angle between two vectors v1 and v2. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v1}]a TLorentz\-Vector 4vector \item[{\em v2}]a TLorentz\-Vector 4vector \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]opening angle in radians between the two vectors \end{Desc}
+\index{mathUtility@{math\-Utility}!getTheta@{getTheta}}
+\index{getTheta@{getTheta}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-Theta (TLorentz\-Vector {\em v})}\label{namespacemathUtility_c20e62da2c47b4c024f9ad71b21e2d83}
+
+
+Function that gets the polar angle of the pz/p. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]The input 4 vector \end{description}
+\end{Desc}
+\index{mathUtility@{math\-Utility}!get_p@{get\_\-p}}
+\index{get_p@{get\_\-p}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\_\-p (TLorentz\-Vector {\em v})}\label{namespacemathUtility_d39157609ed4c41cc77f2606fc724381}
+
+
+Calculates the scalar magnitude of the input vector v. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]The input 4 vector \end{description}
+\end{Desc}
+\index{mathUtility@{math\-Utility}!getPhi@{getPhi}}
+\index{getPhi@{getPhi}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-Phi (TLorentz\-Vector {\em v})}\label{namespacemathUtility_d2bc2aa9ad332288ee959e7ef08b173e}
+
+
+Calculates the azimuthal angle of the input vector v. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]The input 4 vector \end{description}
+\end{Desc}
+\index{mathUtility@{math\-Utility}!getPt@{getPt}}
+\index{getPt@{getPt}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-Pt (TLorentz\-Vector {\em v})}\label{namespacemathUtility_5ada42b91a8d830820e4fbb2b985035d}
+
+
+Function that gets the scalar magnitude of the x and y components of an input 4vector. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]The input 4 vector \end{description}
+\end{Desc}
+\index{mathUtility@{math\-Utility}!getX3constrained@{getX3constrained}}
+\index{getX3constrained@{getX3constrained}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::get\-X3constrained (double {\em x1}, double {\em x2}, \bf{p\-Object} {\em p1}, \bf{p\-Object} {\em p2}, \bf{p\-Object} {\em p3})}\label{namespacemathUtility_f7c548f0002f12634d61b45d2f0a69d8}
+
+
+A function that evaluates the energy of the photon in the event in terms of the positron and electron curvatures, angles between the particles and uses the pion mass constraint. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em x1}]the curvature of the positron \item[{\em x2}]the curvature of the electron \item[{\em p1}]the particle struct of the positron \item[{\em p2}]the particle struct of the electron \item[{\em p3}]the particle struct of the photon \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the photon constrained energy \end{Desc}
+
+
+\subsection{Variable Documentation}
+\index{mathUtility@{math\-Utility}!M@{M}}
+\index{M@{M}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const double \bf{math\-Utility::M} = 0.13497}\label{namespacemathUtility_15aa5c28185796c5cdcd276f72a8b188}
+
+
+\index{mathUtility@{math\-Utility}!m_e@{m\_\-e}}
+\index{m_e@{m\_\-e}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const double \bf{math\-Utility::m\_\-e} = 0.000511}\label{namespacemathUtility_bd44149566c36fbfd33b39aaa828413b}
+
+

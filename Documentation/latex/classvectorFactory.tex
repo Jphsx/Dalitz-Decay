@@ -1,0 +1,181 @@
+\section{vector\-Factory Class Reference}
+\label{classvectorFactory}\index{vectorFactory@{vectorFactory}}
+Reads events from a specified file or calls event generator to create a 3 particle event and packages a raw event into a particle struct array.  
+
+
+{\tt \#include $<$vector\-Factory.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+void \bf{read\-Vector} (const char $\ast$path)
+\begin{CompactList}\small\item\em (deprecated with N events) A function that reads a specified .hepevt file and calls the struct population functions. \item\end{CompactList}\item 
+void \bf{create\-Event} (double \bf{M}, double \bf{m\_\-e}, double initial\_\-p)
+\begin{CompactList}\small\item\em A function that calls the local \doxyref{event\-Generator}{p.}{classeventGenerator} to create a unique 3 particle event and calls the struct population functions. \item\end{CompactList}\item 
+\bf{vector\-Factory} ()
+\begin{CompactList}\small\item\em Empty constructor for quick use of struct population functions that do not require event generation. \item\end{CompactList}\item 
+\bf{vector\-Factory} (double nu)
+\begin{CompactList}\small\item\em Constructor used for generating N events. \item\end{CompactList}\item 
+\bf{vector\-Factory} (double nu, const char $\ast$CMfilepath)
+\begin{CompactList}\small\item\em Constructor used for generating N events and creating a output .hepevt file which contains the CM events. \item\end{CompactList}\item 
+void \bf{set\-TLVector} (int p\-ID, double px, double py, double pz, double m)
+\begin{CompactList}\small\item\em Given the vector information and a particle ID, this helper method will populate the 4 vector for a struct whose index is associated with the particle ID. \item\end{CompactList}\item 
+void \bf{make\-Calculations} (\bf{Particle\-Parameters} \&particle)
+\begin{CompactList}\small\item\em Takes a reference address to a particle struct with a predefined particle ID and sets the struct members at the address (pt, theta, x\_\-m). \item\end{CompactList}\item 
+void \bf{set\-PID} (\bf{Particle\-Parameters} $\ast$evt\-P)
+\begin{CompactList}\small\item\em Given a particle struct array, sets all the particle IDs at the appropriate indices. \item\end{CompactList}\item 
+void \bf{copy\-Object} (\bf{Particle\-Parameters} $\ast$evt\-P\_\-a, \bf{Particle\-Parameters} $\ast$evt\-P\_\-b)
+\begin{CompactList}\small\item\em Method that makes a deep copy of one struct array onto another struct array. \item\end{CompactList}\item 
+void \bf{print\-Vectors} ()
+\begin{CompactList}\small\item\em Debugging method that prints the contents of the local particle struct array. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+\bf{Particle\-Parameters} $\ast$ \bf{arr\-Ptr}
+\item 
+\bf{event\-Generator} $\ast$ \bf{gen}
+\end{CompactItemize}
+\subsection*{Classes}
+\begin{CompactItemize}
+\item 
+struct \bf{Particle\-Parameters}
+\begin{CompactList}\small\item\em Event particle container. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Reads events from a specified file or calls event generator to create a 3 particle event and packages a raw event into a particle struct array. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{vectorFactory@{vector\-Factory}!vectorFactory@{vectorFactory}}
+\index{vectorFactory@{vectorFactory}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}vector\-Factory::vector\-Factory ()}\label{classvectorFactory_8b4e9ea24e98a75762a0a9847b766905}
+
+
+Empty constructor for quick use of struct population functions that do not require event generation. 
+
+\index{vectorFactory@{vector\-Factory}!vectorFactory@{vectorFactory}}
+\index{vectorFactory@{vectorFactory}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}vector\-Factory::vector\-Factory (double {\em nu})}\label{classvectorFactory_12c3346e10c3b5da468cb48c92f0f40e}
+
+
+Constructor used for generating N events. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em nu}]2m\_\-e/M which the square is used as the bottom boundary for generating x,y values with the Monte Carlo rejection method \end{description}
+\end{Desc}
+\index{vectorFactory@{vector\-Factory}!vectorFactory@{vectorFactory}}
+\index{vectorFactory@{vectorFactory}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}vector\-Factory::vector\-Factory (double {\em nu}, const char $\ast$ {\em CMfilepath})}\label{classvectorFactory_520b494f0c95f6e8fd94fb95d0ca0532}
+
+
+Constructor used for generating N events and creating a output .hepevt file which contains the CM events. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em nu}]2m\_\-e/M which the square is used as the bottom boundary for generating x,y values with the Monte Carlo rejection method \item[{\em CMfilepath}]the filepath designated for \doxyref{event\-Generator}{p.}{classeventGenerator} to output CM events into \end{description}
+\end{Desc}
+
+
+\subsection{Member Function Documentation}
+\index{vectorFactory@{vector\-Factory}!copyObject@{copyObject}}
+\index{copyObject@{copyObject}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void vector\-Factory::copy\-Object (\bf{Particle\-Parameters} $\ast$ {\em evt\-P\_\-a}, \bf{Particle\-Parameters} $\ast$ {\em evt\-P\_\-b})}\label{classvectorFactory_bb4329b2d69f4b001d9a86ed92c9053d}
+
+
+Method that makes a deep copy of one struct array onto another struct array. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em evt\-P\_\-a}]the particle struct array to be copied \item[{\em evt\-P\_\-b}]the particle struct array to become a copy of the first argument \end{description}
+\end{Desc}
+\index{vectorFactory@{vector\-Factory}!createEvent@{createEvent}}
+\index{createEvent@{createEvent}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void vector\-Factory::create\-Event (double {\em M}, double {\em m\_\-e}, double {\em initial\_\-p})}\label{classvectorFactory_119f2a948a3ff89dc72e06b04ceb483a}
+
+
+A function that calls the local \doxyref{event\-Generator}{p.}{classeventGenerator} to create a unique 3 particle event and calls the struct population functions. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em M}]The mass of the pion. \item[{\em m\_\-e}]The mass of the electron/positron. \item[{\em initial\_\-p}]The initial momentum of the system in the Lab frame. \end{description}
+\end{Desc}
+\index{vectorFactory@{vector\-Factory}!makeCalculations@{makeCalculations}}
+\index{makeCalculations@{makeCalculations}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void vector\-Factory::make\-Calculations (\bf{Particle\-Parameters} \& {\em particle})}\label{classvectorFactory_4967ba592ac0b134d456702095959431}
+
+
+Takes a reference address to a particle struct with a predefined particle ID and sets the struct members at the address (pt, theta, x\_\-m). 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em particle}]a particle struct passed by reference. \end{description}
+\end{Desc}
+\index{vectorFactory@{vector\-Factory}!printVectors@{printVectors}}
+\index{printVectors@{printVectors}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void vector\-Factory::print\-Vectors ()\hspace{0.3cm}{\tt  [inline]}}\label{classvectorFactory_551e601cb9c7433d8bf07e37b3440bb2}
+
+
+Debugging method that prints the contents of the local particle struct array. 
+
+\index{vectorFactory@{vector\-Factory}!readVector@{readVector}}
+\index{readVector@{readVector}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void vector\-Factory::read\-Vector (const char $\ast$ {\em path})}\label{classvectorFactory_bac6da478199810f5cef63a501d0bb60}
+
+
+(deprecated with N events) A function that reads a specified .hepevt file and calls the struct population functions. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em path}]The path the the specified .hepevt file. \end{description}
+\end{Desc}
+\index{vectorFactory@{vector\-Factory}!setPID@{setPID}}
+\index{setPID@{setPID}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void vector\-Factory::set\-PID (\bf{Particle\-Parameters} $\ast$ {\em evt\-P})}\label{classvectorFactory_5f1a908bf05c96dd24a9bf9b03cf7619}
+
+
+Given a particle struct array, sets all the particle IDs at the appropriate indices. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em evt\-P}]event particles, a pointer to a particle struct array. \end{description}
+\end{Desc}
+\index{vectorFactory@{vector\-Factory}!setTLVector@{setTLVector}}
+\index{setTLVector@{setTLVector}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void vector\-Factory::set\-TLVector (int {\em p\-ID}, double {\em px}, double {\em py}, double {\em pz}, double {\em m})}\label{classvectorFactory_60f93744d9cf865be4736e69761d2001}
+
+
+Given the vector information and a particle ID, this helper method will populate the 4 vector for a struct whose index is associated with the particle ID. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em p\-ID}]The particle ID which determines the index of where the 4 vector will be set. \item[{\em px}]The x-component of momentum. \item[{\em py}]The y-component of momentum. \item[{\em pz}]The z-component of momentum. \item[{\em m}]The mass of the particle. \end{description}
+\end{Desc}
+
+
+\subsection{Member Data Documentation}
+\index{vectorFactory@{vector\-Factory}!arrPtr@{arrPtr}}
+\index{arrPtr@{arrPtr}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\bf{Particle\-Parameters}$\ast$ \bf{vector\-Factory::arr\-Ptr}}\label{classvectorFactory_aaa4c338de13944bf1f39504adcf20a1}
+
+
+Local copy of particle struct array, indices match the standard particle numbers i.e. 1-positron, 2-electron, 3-photon. \index{vectorFactory@{vector\-Factory}!gen@{gen}}
+\index{gen@{gen}!vectorFactory@{vector\-Factory}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\bf{event\-Generator}$\ast$ \bf{vector\-Factory::gen}}\label{classvectorFactory_19fed3ebd2e2122e6f095117c2ecf28f}
+
+
+Local instance of \doxyref{event\-Generator}{p.}{classeventGenerator} to get 4 vectors 
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+/home/justin/work/Single\-Particle\-Generator/dalitz\_\-decay/dalitz\_\-chisq/vector\-Factory/\bf{vector\-Factory.h}\end{CompactItemize}

@@ -1,0 +1,206 @@
+\section{event\-Generator Class Reference}
+\label{classeventGenerator}\index{eventGenerator@{eventGenerator}}
+Creates unique three particle events in the CM frame and Lab frame.  
+
+
+{\tt \#include $<$event\-Generator.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+TLorentz\-Vector $\ast$ \bf{generate\-Event} (double \bf{M}, double \bf{m\_\-e}, double initial\_\-p)
+\begin{CompactList}\small\item\em Creates a three particle event and returns the set of particles in a 4 vector array. \item\end{CompactList}\item 
+\bf{event\-Generator} (double nu)
+\begin{CompactList}\small\item\em Constructor to initialize all local class members such as the random number generator and Monte Carlo x,y generator. \item\end{CompactList}\item 
+\bf{event\-Generator} (double nu, const char $\ast$CMfilename)
+\begin{CompactList}\small\item\em Constructor to initialize all local class members such as the random number generator and Monte Carlo x,y generator, this constructor is used specifically to supply the class with a filepath output CM events into. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Private Member Functions}
+\begin{CompactItemize}
+\item 
+void \bf{rotate\-System} (TLorentz\-Vector $\ast$\&evt\-P)
+\begin{CompactList}\small\item\em Takes in a 4vector array and rotates the particle system about the x,y and z axis. \item\end{CompactList}\item 
+void \bf{boost\-To\-Lab} (TLorentz\-Vector $\ast$\&evt\-P, double initial\_\-p, double \bf{M})
+\begin{CompactList}\small\item\em Boosts the particles in the referenced 4vector array along a boost vector whose magnitude is determined by the initial conditions but has a randomly generated direction. \item\end{CompactList}\item 
+TLorentz\-Vector \bf{make\-Photon} (double x, double \bf{M})
+\begin{CompactList}\small\item\em Creates a 4vector for a photon in the event, given the conditions provided by the arguments. \item\end{CompactList}\item 
+TLorentz\-Vector \bf{make\-Electron} (double x, double y, double \bf{M}, double \bf{m\_\-e})
+\begin{CompactList}\small\item\em Creates a 4vector for an electron in the event, given the conditions provided by the arguments. \item\end{CompactList}\item 
+TLorentz\-Vector \bf{make\-Positron} (double x, double y, double \bf{M}, double \bf{m\_\-e})
+\begin{CompactList}\small\item\em Creates a 4vector for a positron in the event, given the conditions provided by the arguments. \item\end{CompactList}\item 
+void \bf{vector\-Printer} (TLorentz\-Vector $\ast$v)
+\begin{CompactList}\small\item\em Debugging method that prints the contents of a 4vector array. \item\end{CompactList}\item 
+void \bf{write\-Event} (ostream \&f1, TLorentz\-Vector $\ast$\&evt\-P)
+\begin{CompactList}\small\item\em Helper method to write an 4vector Array in the specified file steam, the PIDs for the standard .hepevt output format are hardcoded into a array that exists only in the scope of this function. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+TRandom1 $\ast$ \bf{RNG}
+\item 
+\bf{XYgenerator} $\ast$ \bf{xygen}
+\item 
+ofstream \bf{CMfs}
+\item 
+bool \bf{CMwrite}
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Creates unique three particle events in the CM frame and Lab frame. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{eventGenerator@{event\-Generator}!eventGenerator@{eventGenerator}}
+\index{eventGenerator@{eventGenerator}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}event\-Generator::event\-Generator (double {\em nu})}\label{classeventGenerator_506a448348d988152af480424f9810dc}
+
+
+Constructor to initialize all local class members such as the random number generator and Monte Carlo x,y generator. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em nu}]2m\_\-e/M where nu$^\wedge$2 is the bottom boundary for the parameter x (nu used in the constructor argument of XY generator, this constructor is simply a pass through). \end{description}
+\end{Desc}
+\index{eventGenerator@{event\-Generator}!eventGenerator@{eventGenerator}}
+\index{eventGenerator@{eventGenerator}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}event\-Generator::event\-Generator (double {\em nu}, const char $\ast$ {\em CMfilename})}\label{classeventGenerator_1e166af11f1747181e2e88c7b21d448f}
+
+
+Constructor to initialize all local class members such as the random number generator and Monte Carlo x,y generator, this constructor is used specifically to supply the class with a filepath output CM events into. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em nu}]2m\_\-e/M where nu$^\wedge$2 is the bottom boundary for the parameter x (nu used in the constructor argument of XY generator, this constructor is also a pass through) \item[{\em CMfilename}]the string path used for the filestream to output CM events in the \doxyref{generate\-Event()}{p.}{classeventGenerator_906530a99b60c46d5c31abcc35412dca} method \end{description}
+\end{Desc}
+
+
+\subsection{Member Function Documentation}
+\index{eventGenerator@{event\-Generator}!boostToLab@{boostToLab}}
+\index{boostToLab@{boostToLab}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void event\-Generator::boost\-To\-Lab (TLorentz\-Vector $\ast$\& {\em evt\-P}, double {\em initial\_\-p}, double {\em M})\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_558fad78b53ab312f83a3606af60ca4d}
+
+
+Boosts the particles in the referenced 4vector array along a boost vector whose magnitude is determined by the initial conditions but has a randomly generated direction. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em evt\-P}]The address of the pointer to a 4 vector array. \item[{\em initial\_\-p}]The initial momentum of the system in the lab frame. \item[{\em M}]the mass of the pion. \end{description}
+\end{Desc}
+\index{eventGenerator@{event\-Generator}!generateEvent@{generateEvent}}
+\index{generateEvent@{generateEvent}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector$\ast$ event\-Generator::generate\-Event (double {\em M}, double {\em m\_\-e}, double {\em initial\_\-p})}\label{classeventGenerator_906530a99b60c46d5c31abcc35412dca}
+
+
+Creates a three particle event and returns the set of particles in a 4 vector array. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em M}]the mass of the pion. \item[{\em m\_\-e}]the mass of the electron/positron. \item[{\em initial\_\-p}]The initial momentum of the system in the lab frame. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]A pointer to TLorentz\-Vector array of length N particles+1. \end{Desc}
+\index{eventGenerator@{event\-Generator}!makeElectron@{makeElectron}}
+\index{makeElectron@{makeElectron}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector event\-Generator::make\-Electron (double {\em x}, double {\em y}, double {\em M}, double {\em m\_\-e})\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_1d58fa088f3283debfe4a7b1ffb565ab}
+
+
+Creates a 4vector for an electron in the event, given the conditions provided by the arguments. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em x}]the electron/positron invariant mass, created by XY generator. \item[{\em y}]Energy partition in the CM frame, created by XY generator. \item[{\em M}]the mass of the pion. \item[{\em m\_\-e}]the mass of the electron/positron. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]a TLorentz\-Vector for the electron. \end{Desc}
+\index{eventGenerator@{event\-Generator}!makePhoton@{makePhoton}}
+\index{makePhoton@{makePhoton}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector event\-Generator::make\-Photon (double {\em x}, double {\em M})\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_0764ab11d703e5de101205725a2133b2}
+
+
+Creates a 4vector for a photon in the event, given the conditions provided by the arguments. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em x}]the electron/positron invariant mass, created by \doxyref{XYgenerator}{p.}{classXYgenerator}. \item[{\em M}]the mass of the pion. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]a TLorentz\-Vector for the photon. \end{Desc}
+\index{eventGenerator@{event\-Generator}!makePositron@{makePositron}}
+\index{makePositron@{makePositron}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector event\-Generator::make\-Positron (double {\em x}, double {\em y}, double {\em M}, double {\em m\_\-e})\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_ffcc658eab91a64d9ee06b7191e019eb}
+
+
+Creates a 4vector for a positron in the event, given the conditions provided by the arguments. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em x}]the electron/positron invariant mass, created by XY generator. \item[{\em y}]Energy partition in the CM frame, created by XY generator. \item[{\em M}]the mass of the pion. \item[{\em m\_\-e}]the mass of the electron/positron. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]a TLorentz\-Vector for the positron. \end{Desc}
+\index{eventGenerator@{event\-Generator}!rotateSystem@{rotateSystem}}
+\index{rotateSystem@{rotateSystem}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void event\-Generator::rotate\-System (TLorentz\-Vector $\ast$\& {\em evt\-P})\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_87cb4aa66aa978f6c10f3fae902a23a7}
+
+
+Takes in a 4vector array and rotates the particle system about the x,y and z axis. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em evt\-P}]address of the pointer of a TLorentz\-Vector array. \end{description}
+\end{Desc}
+\index{eventGenerator@{event\-Generator}!vectorPrinter@{vectorPrinter}}
+\index{vectorPrinter@{vectorPrinter}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void event\-Generator::vector\-Printer (TLorentz\-Vector $\ast$ {\em v})\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_435e7d82ae8d5399f1010a1af1fa12a2}
+
+
+Debugging method that prints the contents of a 4vector array. 
+
+\index{eventGenerator@{event\-Generator}!writeEvent@{writeEvent}}
+\index{writeEvent@{writeEvent}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void event\-Generator::write\-Event (ostream \& {\em f1}, TLorentz\-Vector $\ast$\& {\em evt\-P})\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_33520dc8f925e72ddfb5d9f86f77147f}
+
+
+Helper method to write an 4vector Array in the specified file steam, the PIDs for the standard .hepevt output format are hardcoded into a array that exists only in the scope of this function. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em f1}]the filestream to be written to. \item[{\em evt\-P}]the CM rotated 4vector array \end{description}
+\end{Desc}
+
+
+\subsection{Member Data Documentation}
+\index{eventGenerator@{event\-Generator}!CMfs@{CMfs}}
+\index{CMfs@{CMfs}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ofstream \bf{event\-Generator::CMfs}\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_7ea41299e91e5e7f8db561384a43f701}
+
+
+Filestream shunted into event generator to output the CM events to .hepevt files \index{eventGenerator@{event\-Generator}!CMwrite@{CMwrite}}
+\index{CMwrite@{CMwrite}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool \bf{event\-Generator::CMwrite}\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_c418504bbca8418b20a6403562c638f4}
+
+
+Boolean flag to indicate to the class whether to write CM events to file \index{eventGenerator@{event\-Generator}!RNG@{RNG}}
+\index{RNG@{RNG}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TRandom1$\ast$ \bf{event\-Generator::RNG}\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_2bcf5e77784f38b77df244042efdc29b}
+
+
+Local copy of the random number generator used for generating the random directions of the particle rotations and random boost direction. \index{eventGenerator@{event\-Generator}!xygen@{xygen}}
+\index{xygen@{xygen}!eventGenerator@{event\-Generator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\bf{XYgenerator}$\ast$ \bf{event\-Generator::xygen}\hspace{0.3cm}{\tt  [private]}}\label{classeventGenerator_a1e53c8f8d4f4c7821b6514b38c8d1ec}
+
+
+Local copy of \doxyref{XYgenerator}{p.}{classXYgenerator} to supply particle creation methods with x and y values. 
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+/home/justin/work/Single\-Particle\-Generator/dalitz\_\-decay/dalitz\_\-chisq/event\-Generator/\bf{event\-Generator.h}\end{CompactItemize}

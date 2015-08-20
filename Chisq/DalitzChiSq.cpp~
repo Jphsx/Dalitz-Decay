@@ -1,0 +1,95 @@
+#include "DalitzChiSq.h"
+
+using namespace std;
+
+
+//constructor that initializes the masses for most calculations, need to add another one that sets these values externally
+DalitzChiSq::DalitzChiSq(){
+	M = 0.13497;
+	m_e = 0.000511;
+	
+}
+//returns the opening angle between to 4vectors
+/*double DalitzChiSq::getCosTheta(TLorentzVector v1, TLorentzVector v2){
+	return (v1.Px()*v2.Px() + v1.Py()*v2.Py() + v1.Pz()*v2.Pz())/(v1.P()*v2.P());
+}
+//returns a function of opening angles between particle 1 and 2 used for the particle 3 constraint equation
+double DalitzChiSq::getZ12(pObject p1, pObject p2){
+	//double beta1 = p1.v.P()/p1.v.E();
+	//double beta2 = p2.v.P()/p2.v.E();
+	//return 2*((1/(beta1*beta2)) - getCosTheta(p1.v,p2.v));
+	return mathUtility::getZ12(p1,p2);
+}
+//returns a function of opening angles between particle 2 and 3 used for the particle 3 constraint equation
+double DalitzChiSq::getZ23(pObject p2, pObject p3){
+	//double beta2 = p2.v.P()/p2.v.E();
+	//return 2*((1/beta2) - getCosTheta(p2.v,p3.v));
+	return mathUtility::getZ23(p2,p3);
+}
+//returns a function of opening angles between particle 1 and 3 used for the particle 3 constraint equation
+double DalitzChiSq::getZ13(pObject p1, pObject p3){
+	//double beta1 = p1.v.P()/p1.v.E();
+	//return 2*((1/beta1) - getCosTheta(p1.v,p3.v));
+	return mathUtility::getZ12(p1,p3);
+}
+//takes a particle struct, and based on the pid, determines the variance of x1m,x2m (curvatures) or x3m (measured photon energy)
+double DalitzChiSq::getVariance(pObject p){
+	if(p.pID == 11 || p.pID == -11){
+		//1/sin(theta) is due to the assumption imposed that the collider is cylindrical
+		return (2e-5*2e-5) + pow((1e-3 * 1/p.pt * 1/sin(p.theta) ),2);	
+	}
+	if(p.pID == 22){
+		return pow(p.x_m,2) * (pow(0.16/sqrt(p.x_m),2) + (0.01*0.01));
+	}
+	return mathUtility::getVariance(p);
+}
+//calculates the energy of the photon in terms of the particle masses (using the pion mass constraint), angles, and curvatures 
+double DalitzChiSq::getX3constrained(double x1,double x2, pObject p1, pObject p2, pObject p3){
+	//double topterm =   M*M - 2*m_e*m_e - (getZ12(p1,p2)/(sin(p1.theta) * sin(p2.theta) *x1*x2));
+	//double bottomterm = ( (getZ13(p1,p3)/(sin(p1.theta) * x1)) + (getZ23(p2,p3)/(sin(p2.theta) * x2)) );
+	//return topterm/bottomterm;
+	return mathUtility::getX3constrained(x1,x2,p1,p2,p3);
+}*/
+//evaluates the X^2(x1,x2,x3) function such that x1 x2 are exactly 0 and the mean x3 is given by the mass constrained energy
+double DalitzChiSq::getMinimalistChiSq(pObject p1, pObject p2, pObject p3){
+	return pow( (mathUtility::getX3constrained(p1.x_m,p2.x_m,p1,p2,p3) - p3.x_m) , 2)/mathUtility::getVariance(p3);
+}
+//evaluates the X^2(x1,x2,x3) function, used to explore the x1, x2 (mean) space and later approximate the minimum of the X^2 function
+double DalitzChiSq::getEliminationChiSq(double x1, double x2, pObject p1, pObject p2, pObject p3){
+	double term1 = pow(x1-(p1.x_m),2) / mathUtility::getVariance(p1);
+	double term2 = pow(x2-(p2.x_m),2) / mathUtility::getVariance(p2);
+	double term3 = pow( mathUtility::getX3constrained(x1,x2,p1,p2,p3) - p3.x_m , 2)/mathUtility::getVariance(p3);
+	return term1+term2+term3;
+}
+//ap1&ap2 is true particle values where the contour will be centered and span +/- offset with resolution by n bins
+//sets up the conditions for contour mapping of the elimination Chisq method, spans the x1,x2 space and creates a contour
+double DalitzChiSq::generateContour(pObject ap1, pObject ap2, pObject p1, pObject p2, pObject p3, int bins, double offset){
+	TFile *f = new TFile("../EventOutputs/DalitzContour.root", "UPDATE");
+	int nbinsx=bins;
+	int nbinsy=bins;
+	
+	double xmin=(ap1.x_m)-offset;
+	double ymin=(ap2.x_m)-offset;
+	double xmax=(ap1.x_m)+offset;
+	double ymax=(ap2.x_m)+offset;
+	
+	double chisq;
+	double x1,x2;
+	
+	TH2D *hcont = new TH2D("h2","#chi^{2} contours for Dalitz event; k_{1} ; k_{2}", nbinsx, xmin, xmax, nbinsy, ymin, ymax);
+	for (int i=1; i <= nbinsx; i++){                  // ROOT starts at 1 (0 is underflow)         
+        	x1 = hcont->GetXaxis()->GetBinCenter(i);
+        	for (int j=1; j <= nbinsy; j++){         
+           		x2 = hcont->GetYaxis()->GetBinCenter(j);
+           		chisq = getEliminationChiSq(x1,x2,p1,p2,p3);
+           		hcont->Fill(x1,x2,chisq);
+		}
+	}
+
+	f->Write();
+}
+
+
+/*int main(){cout<<"hello"<<endl;
+DalitzChiSq* test = new DalitzChiSq();
+cout<<test->m_e<<endl;}*/

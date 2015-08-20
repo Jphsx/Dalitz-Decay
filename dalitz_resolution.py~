@@ -1,0 +1,199 @@
+# (/usr/bin/python)
+# Tested with Python 2.4.3 and ROOT 5.34/03 on SL5.3
+###################################################################################################################
+#                                                                                                                 #
+# Python script to take in 4vectors from dalitz decay simulation, and smear the resolution by simulating the      #
+# detector response, by inputting a magnetic field and curvature    
+#                                                                                                                 #
+# Use PyROOT - so have access to ROOT facilities for random numbers, 4-vector manipulation, histograms.           #
+#                                                                                                                 #     
+#                                          Justin Anguiano     June 29th 2015                                     #
+#                                                     #
+################################################################################################################### \
+
+import sys
+import ROOT
+import math
+import random
+import argparse
+
+#when the class used externally the call flow would be to setparticleattributes, calculate and smear, then getsmear vector
+class DalitzResolutionSmear:
+	
+	"""
+	#__v = ROOT.TLorentzVector()
+	#__vSmear = ROOT.TLorentzVector()
+	#__Pt=0.0 #k = 1/pt
+	#__theta=0.0 #with respect to zAxis
+	#__phi=0.0
+	#__p=0.0	#scalar momentum
+	#__variance=0.0
+	#__gaussValue=0.0
+	#__q=0 #electron -1, positron +1
+	#__ptsm=0.0
+	###program needs a classification for either photon, electron, or positron
+	__classification="none"
+	__random = ROOT.TRandom1(1,1000)
+	"""
+
+	
+	def __init__(self):
+		self.__v = ROOT.TLorentzVector()
+		self.__vSmear = ROOT.TLorentzVector()
+		self.__Pt=0.0 #k = 1/pt
+		self.__theta=0.0 #with respect to zAxis
+		self.__phi=0.0
+		self.__p=0.0	#scalar momentum
+		self.__variance=0.0
+		self.__gaussValue=0.0
+		self.__q=0 #electron -1, positron +1
+		self.__ptsm=0.0
+	###program needs a classification for either photon, electron, or positron
+		self.__classification="none"
+		self.__random = ROOT.TRandom1(1000,3)
+
+	def setParticleAttributes(self,classifier,tlvector):
+		self.__classification=classifier
+		if classifier == "photon" :
+			self.__q = 0
+		if classifier == "electron" :
+			self.__q = -1
+		if classifier == "positron" :
+			self.__q = 1
+		#self.__v=tlvector
+		self.setV(tlvector.Px(),tlvector.Py(),tlvector.Pz(),tlvector.M())
+
+	def setV(self, px,py,pz,m):
+		self.__v.SetXYZM(px,py,pz,m)
+
+	def calculatePt(self):
+		self.__Pt = math.sqrt(self.__v.Px()*self.__v.Px() + self.__v.Py()*self.__v.Py())
+	
+	def calculateP(self):
+		self.__p = math.sqrt(self.__Pt*self.__Pt + self.__v.Pz()*self.__v.Pz())
+
+	def calculateAngles(self):
+		self.__theta = math.acos(self.__v.Pz()/self.__p)
+		
+		self.__phi = math.atan2(self.__v.Py(),self.__v.Px())
+		
+	
+	def calculateVariance(self):
+		if self.__classification == "photon" :
+			self.__variance = (math.pow(self.__v.E(),2)) * (math.pow(0.16/math.sqrt(self.__v.E()),2) + (0.01*0.01))
+		if self.__classification == "electron" or self.__classification == "positron" :
+			self.__variance = (2e-5*2e-5) + math.pow((1e-3 * 1/self.__Pt * 1/math.sin(self.__theta) ),2)
+		
+	def setGaussValue(self): ##smearing gauss values
+		if self.__classification == "photon" :
+			self.__gaussValue = self.__random.Gaus(self.__v.E(),math.sqrt(self.__variance))
+#			self.__gaussValue = self.__random.Gaus()
+		if self.__classification == "electron" or self.__classification == "positron" :
+			self.__gaussValue = self.__random.Gaus(1/self.__Pt, math.sqrt(self.__variance))
+
+	def smearVector(self):
+		if self.__classification == "photon" :
+			self.__ptsm =  self.__gaussValue * math.sin(self.__theta)
+			#print self.__ptsm, " ", self.__v.E()
+		if self.__classification == "electron" or self.__classification == "positron" :
+			self.__ptsm = 1/ self.__gaussValue
+
+		self.__vSmear.SetXYZM(self.__ptsm*math.cos(self.__phi), self.__ptsm*math.sin(self.__phi), self.__ptsm*(1/math.tan(self.__theta)), self.__v.M())
+	
+	def calculateAndSmear(self):
+		self.calculatePt()
+		self.calculateP()
+		self.calculateAngles()
+		self.calculateVariance()
+		self.setGaussValue()
+		self.smearVector()
+
+	def getVsmear(self):
+		return self.__vSmear	
+	
+	def getGaus(self):
+		return self.__gaussValue
+
+	def getVariance(self):
+		return self.__variance
+
+def main():
+
+	#def copy(self,smearvector,vector):
+	#	vector.SetXYZM(smearvector.Px(),smearvector.Py(),smearvector.Pz(),smearvector.M())
+		
+	
+	# for debugging purposes inputting a sample 4 vector and seeing what resolution class spits out
+	#sample 4vectors from hepevt px py pz E m
+	#1 22 0 0 0 0 0.922029965542 0.441738026816 -0.772095226315 1.28117242407 2.10734242554e-08 0.0 0.0 -0.0 0.0
+	#1 11 0 0 0 0 3.71964346513 1.64526318453 -2.87237515325 4.97927482031 0.000510999995155 0.0 0.0 -0.0 0.0
+	#1 -11 0 0 0 0 2.79495810341 1.2330212975 -2.15845663765 3.74046355919 0.000510999998632 0.0 0.0 -0.0 0.0
+	v0 = ROOT.TLorentzVector()
+	v1 = ROOT.TLorentzVector()
+	v2 = ROOT.TLorentzVector()
+	v3 = ROOT.TLorentzVector()
+	vS1 = ROOT.TLorentzVector()
+	vS2 = ROOT.TLorentzVector()
+	vS3 = ROOT.TLorentzVector()
+	vs = ROOT.TLorentzVector()
+
+	v1.SetXYZM(0.922029965542, 0.441738026816, -0.772095226315, 2.10734242554e-08)
+	v2.SetXYZM(3.71964346513, 1.64526318453, -2.87237515325, 0.000510999995155)
+	v3.SetXYZM(2.79495810341, 1.2330212975, -2.15845663765, 0.000510999998632)
+
+	smear1 = DalitzResolutionSmear()
+	smear2 = DalitzResolutionSmear()
+	smear3 = DalitzResolutionSmear()
+
+	smear1.setParticleAttributes("photon",v1)
+	smear1.calculateAndSmear()
+	vS1 = smear1.getVsmear()
+	print "photon p ", v1.P(), " px ", v1.Px()," py ", v1.Py(), " pz ", v1.Pz() ," E " ,v1.E(), " m ",v1.M()
+	print "smeared photon p ", vS1.P(), " px ", vS1.Px()," py ", vS1.Py(), " pz ", vS1.Pz() ," E " ,vS1.E(), " m ",vS1.M()
+	print ""
+
+        vc1 = ROOT.TLorentzVector()
+        vc1 = vS1
+
+	smear2.setParticleAttributes("electron",v2)
+	smear2.calculateAndSmear()
+	print "X photon p ", v1.P(), " px ", v1.Px()," py ", v1.Py(), " pz ", v1.Pz() ," E " ,v1.E(), " m ",v1.M()
+	print "smeared photon p ", vS1.P(), " px ", vS1.Px()," py ", vS1.Py(), " pz ", vS1.Pz() ," E " ,vS1.E(), " m ",vS1.M()
+	print ""
+	vS2 = smear2.getVsmear()
+	print "electron p ", v2.P(), " px ", v2.Px()," py ", v2.Py(), " pz ", v2.Pz() ," E " ,v2.E(), " m ",v2.M()
+	print "smeared electron p ", vS2.P(), " px ", vS2.Px()," py ", vS2.Py(), " pz ", vS2.Pz() ," E " ,vS2.E(), " m ",vS2.M()
+	print ""
+
+
+	smear3.setParticleAttributes("positron",v3)
+	smear3.calculateAndSmear()
+	vS3 = smear3.getVsmear()
+	print "positron p ", v3.P(), " px ", v3.Px()," py ", v3.Py(), " pz ", v3.Pz() ," E " ,v3.E(), " m ",v3.M()
+	print "smeared positron p ", vS3.P(), " px ", vS3.Px()," py ", vS3.Py(), " pz ", vS3.Pz() ," E " ,vS3.E(), " m ",vS3.M()
+	print ""
+
+	v0 = v1+v2+v3
+	print "original 4V sum", v0.P(), " px ", v0.Px()," py ", v0.Py(), " pz ", v0.Pz() ," E " ,v0.E(), " m ",v0.M()
+
+	vs = vc1 + vS2 + vS3
+	print "smeared 4V sum", vs.P(), " px ", vs.Px()," py ", vs.Py(), " pz ", vs.Pz() ," E " ,vs.E(), " m ",vs.M()
+	print""
+	print "M", math.sqrt(vs.E()*vs.E()-vs.P()*vs.P())
+
+
+	print "smeared photon p ", vS1.P(), " px ", vS1.Px()," py ", vS1.Py(), " pz ", vS1.Pz() ," E " ,vS1.E(), " m ",vS1.M()
+	print "smeared electron p ", vS2.P(), " px ", vS2.Px()," py ", vS2.Py(), " pz ", vS2.Pz() ," E " ,vS2.E(), " m ",vS2.M()
+	print "smeared positron p ", vS3.P(), " px ", vS3.Px()," py ", vS3.Py(), " pz ", vS3.Pz() ," E " ,vS3.E(), " m ",vS3.M()	
+	print "smeared 4V sum", vs.P(), " px ", vs.Px()," py ", vs.Py(), " pz ", vs.Pz() ," E " ,vs.E(), " m ",vs.M()
+
+
+#if  __name__ =='__main__':
+   # main()
+
+	
+		
+	
+		
+
+	

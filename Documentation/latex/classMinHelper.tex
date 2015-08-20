@@ -1,0 +1,97 @@
+\section{Min\-Helper Class Reference}
+\label{classMinHelper}\index{MinHelper@{MinHelper}}
+Since MINUIT2 cannot be associated with a class when using an algorithm this class reads the .hepevt smeared and unsmeared files similar to \doxyref{vector\-Factory}{p.}{classvectorFactory}. Then populates a particle struct array for use as global variables in the minimization implementation.  
+
+
+{\tt \#include $<$Min\-Helper.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+void \bf{populate\-Particles} (ifstream \&fs, \bf{vector\-Factory} $\ast$vf, \bf{vector\-Factory::Particle\-Parameters} $\ast$\&evtp)
+\begin{CompactList}\small\item\em Method that populates a reference to the passed in struct with the associated filestream. \item\end{CompactList}\item 
+\bf{Min\-Helper} (const char $\ast$\bf{f1}, const char $\ast$\bf{f2})
+\begin{CompactList}\small\item\em Constructor that sets the filestreams according to the filepaths passed in. F1 should be the smeared event and F2 should be the unsmeared event. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+\bf{vector\-Factory::Particle\-Parameters} $\ast$ \bf{evt\-P\_\-actual}
+\item 
+\bf{vector\-Factory::Particle\-Parameters} $\ast$ \bf{evt\-P}
+\item 
+ifstream \bf{f1}
+\item 
+ifstream \bf{f2}
+\item 
+\bf{vector\-Factory} $\ast$ \bf{factory1}
+\item 
+\bf{vector\-Factory} $\ast$ \bf{factory2}
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Since MINUIT2 cannot be associated with a class when using an algorithm this class reads the .hepevt smeared and unsmeared files similar to \doxyref{vector\-Factory}{p.}{classvectorFactory}. Then populates a particle struct array for use as global variables in the minimization implementation. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{MinHelper@{Min\-Helper}!MinHelper@{MinHelper}}
+\index{MinHelper@{MinHelper}!MinHelper@{Min\-Helper}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Min\-Helper::Min\-Helper (const char $\ast$ {\em f1}, const char $\ast$ {\em f2})}\label{classMinHelper_f2f7b9eb2e041508eae391cf51564aef}
+
+
+Constructor that sets the filestreams according to the filepaths passed in. F1 should be the smeared event and F2 should be the unsmeared event. 
+
+
+
+\subsection{Member Function Documentation}
+\index{MinHelper@{Min\-Helper}!populateParticles@{populateParticles}}
+\index{populateParticles@{populateParticles}!MinHelper@{Min\-Helper}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Min\-Helper::populate\-Particles (ifstream \& {\em fs}, \bf{vector\-Factory} $\ast$ {\em vf}, \bf{vector\-Factory::Particle\-Parameters} $\ast$\& {\em evtp})}\label{classMinHelper_fdcc24e50c4479792848e31133d427fc}
+
+
+Method that populates a reference to the passed in struct with the associated filestream. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em fs}]the filestream of the .hepevt file which is to be read from, the filestream to be passed in should be one of the classe's members \item[{\em vf}]the \doxyref{vector\-Factory}{p.}{classvectorFactory} instance whose helper methods populate the given struct array \item[{\em evtp}]the reference to the address of the struct array that is to be populated \end{description}
+\end{Desc}
+
+
+\subsection{Member Data Documentation}
+\index{MinHelper@{Min\-Helper}!evtP@{evtP}}
+\index{evtP@{evtP}!MinHelper@{Min\-Helper}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\bf{vector\-Factory::Particle\-Parameters}$\ast$ \bf{Min\-Helper::evt\-P}}\label{classMinHelper_781c9f952911e08ce5d0ce800ac589fa}
+
+
+Particle struct array that is intended for the smeared event \index{MinHelper@{Min\-Helper}!evtP_actual@{evtP\_\-actual}}
+\index{evtP_actual@{evtP\_\-actual}!MinHelper@{Min\-Helper}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\bf{vector\-Factory::Particle\-Parameters}$\ast$ \bf{Min\-Helper::evt\-P\_\-actual}}\label{classMinHelper_a2fe996aaa8ee5c5e5ea4011effcf8c2}
+
+
+Particle struct array that is intended for the unsmeared event \index{MinHelper@{Min\-Helper}!f1@{f1}}
+\index{f1@{f1}!MinHelper@{Min\-Helper}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ifstream \bf{Min\-Helper::f1}}\label{classMinHelper_cd0e162a5d466ce5d5b46eaefffff22a}
+
+
+Local global filestream f1 which is used to read the smeared event \index{MinHelper@{Min\-Helper}!f2@{f2}}
+\index{f2@{f2}!MinHelper@{Min\-Helper}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ifstream \bf{Min\-Helper::f2}}\label{classMinHelper_bf633aa6a1d4abb9a90db3a611026b3e}
+
+
+Local global filestream f2 which is used to read the unsmeared event \index{MinHelper@{Min\-Helper}!factory1@{factory1}}
+\index{factory1@{factory1}!MinHelper@{Min\-Helper}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\bf{vector\-Factory}$\ast$ \bf{Min\-Helper::factory1}}\label{classMinHelper_17fd31c501e1c4a40576446e0d2bce6d}
+
+
+Local instance of \doxyref{vector\-Factory}{p.}{classvectorFactory} for use of struct population methods, each instance is associated with one filestream \index{MinHelper@{Min\-Helper}!factory2@{factory2}}
+\index{factory2@{factory2}!MinHelper@{Min\-Helper}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\bf{vector\-Factory}$\ast$ \bf{Min\-Helper::factory2}}\label{classMinHelper_2ac7579c095dd98152e5e03c94e102c5}
+
+
+Second instance of \doxyref{vector\-Factory}{p.}{classvectorFactory} for use of struct population methods, each instance is associated with one filestream 
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+/home/justin/work/Single\-Particle\-Generator/dalitz\_\-decay/dalitz\_\-chisq/Minimization/\bf{Min\-Helper.h}\end{CompactItemize}

@@ -1,0 +1,129 @@
+\section{XYgenerator Class Reference}
+\label{classXYgenerator}\index{XYgenerator@{XYgenerator}}
+Generates x,y values that govern the properties of the dielectric mass, such that x is the invariant mass of the dielectric system and y is the Energy partition in the CM frame.  
+
+
+{\tt \#include $<$XYgenerator.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{CompactItemize}
+\item 
+double $\ast$ \bf{generate\-XYpair} ()
+\begin{CompactList}\small\item\em generates a valid X,Y pair based on the globally defined boundary conditions set by the constructor, and uses the test probability function to validate the values generated. \item\end{CompactList}\item 
+\bf{XYgenerator} (double bound)
+\begin{CompactList}\small\item\em Constructor that initializes the random number generator and sets the global bottom boundary for the x value. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Private Member Functions}
+\begin{CompactItemize}
+\item 
+double \bf{get\-Beta} (double x)
+\begin{CompactList}\small\item\em Calculates and provides the beta values intended for y such that -beta$<$y$<$beta based on a pregenerated x value. \item\end{CompactList}\item 
+double \bf{get\-Probability} (double x, double y)
+\begin{CompactList}\small\item\em Calculates the probability of the differential decay rate given the parameters x and y. \item\end{CompactList}\item 
+bool \bf{test\-Probability} (double p, double x, double y)
+\begin{CompactList}\small\item\em The Monte Carlo rejection algorthim returns true for a valid x,y set whose probability is greater than a random number generated between 0 and WMAX. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+double \bf{WMAX}
+\item 
+double \bf{nu}
+\item 
+TRandom1 $\ast$ \bf{RNG}
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Generates x,y values that govern the properties of the dielectric mass, such that x is the invariant mass of the dielectric system and y is the Energy partition in the CM frame. 
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{XYgenerator@{XYgenerator}!XYgenerator@{XYgenerator}}
+\index{XYgenerator@{XYgenerator}!XYgenerator@{XYgenerator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}XYgenerator::XYgenerator (double {\em bound})}\label{classXYgenerator_139ceb16714a96ac93bc8559663c3f63}
+
+
+Constructor that initializes the random number generator and sets the global bottom boundary for the x value. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em bound}]or nu=2m\_\-e/M and defines the boundary such that nu$^\wedge$2$<$x$<$1 \end{description}
+\end{Desc}
+
+
+\subsection{Member Function Documentation}
+\index{XYgenerator@{XYgenerator}!generateXYpair@{generateXYpair}}
+\index{generateXYpair@{generateXYpair}!XYgenerator@{XYgenerator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double$\ast$ XYgenerator::generate\-XYpair ()}\label{classXYgenerator_5d076b34cbf9e0686ee9d31d7cc652d5}
+
+
+generates a valid X,Y pair based on the globally defined boundary conditions set by the constructor, and uses the test probability function to validate the values generated. 
+
+\begin{Desc}
+\item[Returns:]a pointer to a double array containing x and index 0 and y at index 1 \end{Desc}
+\index{XYgenerator@{XYgenerator}!getBeta@{getBeta}}
+\index{getBeta@{getBeta}!XYgenerator@{XYgenerator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double XYgenerator::get\-Beta (double {\em x})\hspace{0.3cm}{\tt  [private]}}\label{classXYgenerator_c6a399d5002a19768f9aaea32054861c}
+
+
+Calculates and provides the beta values intended for y such that -beta$<$y$<$beta based on a pregenerated x value. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em x}]the invariant dielectric mass \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the positive upper bound for y \end{Desc}
+\index{XYgenerator@{XYgenerator}!getProbability@{getProbability}}
+\index{getProbability@{getProbability}!XYgenerator@{XYgenerator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double XYgenerator::get\-Probability (double {\em x}, double {\em y})\hspace{0.3cm}{\tt  [private]}}\label{classXYgenerator_a509cc8132ab8e7ae3d42e48ed7890f8}
+
+
+Calculates the probability of the differential decay rate given the parameters x and y. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em x}]the invariant dielectric mass \item[{\em y}]the energy partition in the CM frame \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the value of P(x,y) \end{Desc}
+\index{XYgenerator@{XYgenerator}!testProbability@{testProbability}}
+\index{testProbability@{testProbability}!XYgenerator@{XYgenerator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool XYgenerator::test\-Probability (double {\em p}, double {\em x}, double {\em y})\hspace{0.3cm}{\tt  [private]}}\label{classXYgenerator_61a2db21e12d4325f7fe7f189cfcffa0}
+
+
+The Monte Carlo rejection algorthim returns true for a valid x,y set whose probability is greater than a random number generated between 0 and WMAX. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em p}]the probability evaluated from the get probability function \item[{\em x}]the invariant dielectric mass \item[{\em y}]the energy partition in the CM frame \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]true or false based on whether the pair of points is valid or rejected, respectively \end{Desc}
+
+
+\subsection{Member Data Documentation}
+\index{XYgenerator@{XYgenerator}!nu@{nu}}
+\index{nu@{nu}!XYgenerator@{XYgenerator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double \bf{XYgenerator::nu}\hspace{0.3cm}{\tt  [private]}}\label{classXYgenerator_f1891c4a4ccaf75a427dba56ac6fa4d2}
+
+
+nu=2m\_\-e/M and defines the boundary of the dielectric invariant mass such that nu$^\wedge$2$<$x$<$1 \index{XYgenerator@{XYgenerator}!RNG@{RNG}}
+\index{RNG@{RNG}!XYgenerator@{XYgenerator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TRandom1$\ast$ \bf{XYgenerator::RNG}\hspace{0.3cm}{\tt  [private]}}\label{classXYgenerator_c9581d61e340997d78f9974eb380cac9}
+
+
+Local instance of random number generator that is used for creating x,y values and test points for the rejection algorthim \index{XYgenerator@{XYgenerator}!WMAX@{WMAX}}
+\index{WMAX@{WMAX}!XYgenerator@{XYgenerator}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double \bf{XYgenerator::WMAX}\hspace{0.3cm}{\tt  [private]}}\label{classXYgenerator_ea8977f81d34d76f2063d8248c2750e0}
+
+
+The approximate maximum of the diferential decay rate (probability density function) 
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+/home/justin/work/Single\-Particle\-Generator/dalitz\_\-decay/dalitz\_\-chisq/MC\_\-Rejection/\bf{XYgenerator.h}\end{CompactItemize}

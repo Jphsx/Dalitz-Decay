@@ -1,0 +1,18 @@
+#!/bin/sh
+
+rm histos_dalitz.root
+date
+
+pyprog=dalitz_hepevt.py
+
+python ${pyprog}  -p 40.0 -s 4361 -n 1000  
+#python ${pyprog}  -p 5.0 -s 4362
+#python ${pyprog}  -p 5.0 -s 4363
+#python ${pyprog}  -p 20.0 -s 4364
+
+date
+
+# Construct the file needed by the HEPEvtStdHepConverter  (note this is linked from ~/work/HEPEvtStdhepConverter)
+ls -1rt $PWD/dalitz*.hepevt >hepevt_files_Long.txt
+
+exit

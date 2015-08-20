@@ -1,0 +1,92 @@
+#include "eventGenerator.h"
+
+eventGenerator::eventGenerator(double nu){
+	RNG = new TRandom();
+	XYgenerator* temp = new XYgenerator(nu);
+	//xygen = new XYgenerator(nu);
+	xygen = temp;
+}
+TLorentzVector* eventGenerator::generateEvent( double M, double m_e, double initial_p){
+	double* xy = xygen->generateXYpair();
+	TLorentzVector* evtP = new TLorentzVector[4];
+	for(int i=1; i<=3; i++){
+		if(i == 1) evtP[i]=makePositron(xy[0],xy[1],M,m_e);
+		if(i == 2) evtP[i]=makeElectron(xy[0],xy[1],M,m_e);
+		if(i == 3) evtP[i]=makePhoton(xy[0],M);
+	}
+	vectorPrinter(evtP);
+	TLorentzVector v0 = evtP[1]+evtP[2]+evtP[3];
+	cout<< "v0 no ROT no boost "<<v0.Px()<< " "<<v0.Py()<< " "<<v0.Pz()<< " "<<v0.P()<< " "<<v0.E()<< " "<<v0.M()<< endl;
+	rotateSystem(evtP);
+	v0 = evtP[1]+evtP[2]+evtP[3];
+	cout<< "v0 ROT no boost "<<v0.Px()<< " "<<v0.Py()<< " "<<v0.Pz()<< " "<<v0.P()<< " "<<v0.E()<< " "<<v0.M()<< endl;
+	boostToLab(evtP, initial_p, M);
+	v0 = evtP[1]+evtP[2]+evtP[3];
+	cout<< "v0 ROT and boost "<<v0.Px()<< " "<<v0.Py()<< " "<<v0.Pz()<< " "<<v0.P()<< " "<<v0.E()<< " "<<v0.M()<< endl;
+	return evtP;
+}
+TLorentzVector eventGenerator::makePhoton(double x, double M){
+	double m_gamma_star = sqrt(x*M*M);
+	double pcm = (M*M - m_gamma_star*m_gamma_star)/(2*M);
+	TLorentzVector v;
+	v.SetXYZM(-pcm,0,0,0);
+	cout<<"PCM "<<pcm<<" "<<x<<endl;
+	return v;
+}
+TLorentzVector eventGenerator::makeElectron(double x, double y,double M, double m_e){
+	double P_lateral = (M/4) * ( (1-x) + y*(1+x) );
+	double P_transverse = sqrt( ((x*M*M/4) * (1-y*y)) - m_e*m_e );
+	cout<<"Ps elec "<<P_lateral<<" "<< P_transverse <<" y "<<y<<" x "<<x<<endl;
+	TLorentzVector v;
+	v.SetXYZM(P_lateral, P_transverse, 0, m_e);
+	return v;
+	
+}
+TLorentzVector eventGenerator::makePositron(double x, double y, double M, double m_e){
+	double P_lateral = (M/4) * ( (1-x) - y*(1+x) );
+	double P_transverse = -sqrt( ((x*M*M/4) * (1-y*y)) - m_e*m_e);
+	TLorentzVector v;
+	v.SetXYZM(P_lateral,P_transverse, 0, m_e);
+	cout<<"Ps posi "<<P_lateral<<" "<< P_transverse <<" y "<<y<<" x "<<x<<endl;
+	return v; 
+}
+void eventGenerator::rotateSystem(TLorentzVector*& evtP){
+	//first rotates di-electron about x-axis
+	double rads =2.0*M_PI*RNG->Uniform(0.0,1.0);
+	for(int i=1; i<=2; i++){
+		evtP[i].RotateX(rads);
+	}
+	//now rotate entire system about each axis
+	rads =2.0*M_PI*RNG->Uniform(0.0,1.0);
+	for(int i=1; i<=3; i++){
+		evtP[i].RotateY(rads);
+	}
+	rads =2.0*M_PI*RNG->Uniform(0.0,1.0);
+	for(int i=1; i<=3; i++){
+		evtP[i].RotateZ(rads);
+	}	
+	rads =2.0*M_PI*RNG->Uniform(0.0,1.0);
+	for(int i=1; i<=3; i++){
+		evtP[i].RotateX(rads);
+	}
+}
+void eventGenerator::boostToLab(TLorentzVector*& evtP, double initial_p, double M){
+	double beta = initial_p/sqrt(initial_p*initial_p + M*M);
+	double phi = 2.0 * M_PI * RNG->Uniform(0.0,1.0);
+	double costh = RNG->Uniform(-1.0,1.0);
+	double theta = acos(costh);
+	TVector3 b(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta));
+	b.SetMag(beta);
+	for(int i=1; i<=3; i++){
+		evtP[i].Boost(b);
+	}
+	
+	
+}
+void eventGenerator::vectorPrinter(TLorentzVector* v){
+	for(int i=1; i<=3; i++){
+		cout<<v[i].Px()<<" "<<v[i].Py()<<" "<<v[i].Pz()<<" "<<v[i].P()<<" "<<v[i].E()<<" "<<v[i].M()<<endl;
+	}
+}
+//int main(){
+//cout<<"that"<<endl;}

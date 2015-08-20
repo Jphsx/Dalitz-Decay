@@ -1,0 +1,60 @@
+\section{vector\-Factory::Particle\-Parameters Struct Reference}
+\label{structvectorFactory_1_1ParticleParameters}\index{vectorFactory::ParticleParameters@{vectorFactory::ParticleParameters}}
+Event particle container.  
+
+
+{\tt \#include $<$vector\-Factory.h$>$}
+
+\subsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+TLorentz\-Vector \bf{v}
+\item 
+double \bf{theta}
+\item 
+double \bf{pt}
+\item 
+double \bf{x\_\-m}
+\item 
+int \bf{p\-ID}
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Event particle container. 
+
+Contains the particle 4 vector, theta, transverse momentum, measured curvature, and the particle ID. For photons the x\_\-m value is the measured energy and theta/pt are unused. 
+
+
+
+\subsection{Member Data Documentation}
+\index{vectorFactory::ParticleParameters@{vector\-Factory::Particle\-Parameters}!pID@{pID}}
+\index{pID@{pID}!vectorFactory::ParticleParameters@{vector\-Factory::Particle\-Parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int \bf{vector\-Factory::Particle\-Parameters::p\-ID}}\label{structvectorFactory_1_1ParticleParameters_961973766aef21c93d8647d6ceb87f54}
+
+
+The particle ID number. \index{vectorFactory::ParticleParameters@{vector\-Factory::Particle\-Parameters}!pt@{pt}}
+\index{pt@{pt}!vectorFactory::ParticleParameters@{vector\-Factory::Particle\-Parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double \bf{vector\-Factory::Particle\-Parameters::pt}}\label{structvectorFactory_1_1ParticleParameters_f7fd158513cf6690d9d6672a4af60022}
+
+
+The particle's transverse momentum. \index{vectorFactory::ParticleParameters@{vector\-Factory::Particle\-Parameters}!theta@{theta}}
+\index{theta@{theta}!vectorFactory::ParticleParameters@{vector\-Factory::Particle\-Parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double \bf{vector\-Factory::Particle\-Parameters::theta}}\label{structvectorFactory_1_1ParticleParameters_15a254897236c9cbbf07c1f468304104}
+
+
+Particle's polar angle with respect to z-axis (electron beam direction) $\ast$Note$\ast$ Photon theta is unused in all calculations, so it remains initialized to 0.0. \index{vectorFactory::ParticleParameters@{vector\-Factory::Particle\-Parameters}!v@{v}}
+\index{v@{v}!vectorFactory::ParticleParameters@{vector\-Factory::Particle\-Parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector \bf{vector\-Factory::Particle\-Parameters::v}}\label{structvectorFactory_1_1ParticleParameters_5fca86d6e11698757a26dc696ab15361}
+
+
+TLorentz particle 4 vector for a raw unsmeared event \index{vectorFactory::ParticleParameters@{vector\-Factory::Particle\-Parameters}!x_m@{x\_\-m}}
+\index{x_m@{x\_\-m}!vectorFactory::ParticleParameters@{vector\-Factory::Particle\-Parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double \bf{vector\-Factory::Particle\-Parameters::x\_\-m}}\label{structvectorFactory_1_1ParticleParameters_fdac11560cb82caeb2e89b5758db3cee}
+
+
+The particle's measured curvature (1/pt). 
+
+The documentation for this struct was generated from the following file:\begin{CompactItemize}
+\item 
+/home/justin/work/Single\-Particle\-Generator/dalitz\_\-decay/dalitz\_\-chisq/vector\-Factory/\bf{vector\-Factory.h}\end{CompactItemize}
