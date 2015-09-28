@@ -29,7 +29,9 @@ double \bf{get\-Phi} (TLorentz\-Vector v)
 double \bf{get\-Pt} (TLorentz\-Vector v)
 \begin{CompactList}\small\item\em Function that gets the scalar magnitude of the x and y components of an input 4vector. \item\end{CompactList}\item 
 double \bf{get\-X3constrained} (double x1, double x2, \bf{p\-Object} p1, \bf{p\-Object} p2, \bf{p\-Object} p3)
-\begin{CompactList}\small\item\em A function that evaluates the energy of the photon in the event in terms of the positron and electron curvatures, angles between the particles and uses the pion mass constraint. \item\end{CompactList}\end{CompactItemize}
+\begin{CompactList}\small\item\em A function that evaluates the energy of the photon in the event in terms of the positron and electron curvatures, angles between the particles and uses the pion mass constraint. \item\end{CompactList}\item 
+double \bf{safe\-Acos} (double x)
+\begin{CompactList}\small\item\em A safer implementation of the arc cos function (as opposed to the standard library) which truncates values near the domain boudaries to avoid minor floating point errors which cause arc cos to return Na\-N. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Variables}
 \begin{CompactItemize}
 \item 
@@ -65,7 +67,7 @@ Returns the variance of the input vector with a previously class defined particl
 \begin{Desc}
 \item[Parameters:]
 \begin{description}
-\item[{\em v}]The input \char`\"{}v\_\-reg\char`\"{} 4 vector \end{description}
+\item[{\em v}]The input \char`\"{}v\_\-reg\char`\"{} 4 vector \item[{\em pid}]the particle ID of the vector v \end{description}
 \end{Desc}
 \index{mathUtility@{math\-Utility}!getVariance@{getVariance}}
 \index{getVariance@{getVariance}!mathUtility@{math\-Utility}}
@@ -77,7 +79,7 @@ Returns the variance of particle based on the arguments given, 11,-11 will give 
 \begin{Desc}
 \item[Parameters:]
 \begin{description}
-\item[{\em p\-ID}]the particle ID \item[{\em xm}]the measured x value (xfit is the intended use)  the polar angle of the particle with respect to the z axis in the accelerator \end{description}
+\item[{\em p\-ID}]the particle ID \item[{\em xm}]the measured x value (xfit is the intended use) \item[{\em theta}]the polar angle of the particle with respect to the z axis in the accelerator \end{description}
 \end{Desc}
 \index{mathUtility@{math\-Utility}!getZ12@{getZ12}}
 \index{getZ12@{getZ12}!mathUtility@{math\-Utility}}
@@ -191,6 +193,20 @@ A function that evaluates the energy of the photon in the event in terms of the 
 \end{Desc}
 \begin{Desc}
 \item[Returns:]the photon constrained energy \end{Desc}
+\index{mathUtility@{math\-Utility}!safeAcos@{safeAcos}}
+\index{safeAcos@{safeAcos}!mathUtility@{math\-Utility}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double math\-Utility::safe\-Acos (double {\em x})}\label{namespacemathUtility_06b88a5f39fcf79a65c2ea867ae57306}
+
+
+A safer implementation of the arc cos function (as opposed to the standard library) which truncates values near the domain boudaries to avoid minor floating point errors which cause arc cos to return Na\-N. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em x}]the argument to cos$^\wedge$-1 \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the arc cosine of parameter x \end{Desc}
 
 
 \subsection{Variable Documentation}

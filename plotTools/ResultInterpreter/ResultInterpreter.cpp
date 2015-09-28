@@ -26,7 +26,7 @@ void ResultInterpreter::makeHistos(int Nevs, ifstream& f1){
 	TH1D* hpullrfx3 = new TH1D("hpullrfx3", "pull distribution between x3 real and x3 fit; x3_real-x3fit/varx3;Frequency",100,-0.3,0.3);
 	TH1D* hchisq = new TH1D("hchisq", " elimination #chi^{2}; #chi^{2}; Frequency",100,0,10);
 	TH1D* hchisqLarge = new TH1D("hchisqLarge","elimination #chi^{2};#chi^{2};Events Per bin",100,0,30);
-	
+	TH1D* hchisqP = new TH1D("hchisqP", "probability of #chi^{2} from elimination;Probabilty;Events Per Bin",100,0,1);
 
 
 
@@ -64,6 +64,7 @@ void ResultInterpreter::makeHistos(int Nevs, ifstream& f1){
 				if(i==0) {
 					hchisq->Fill(fitdat[5]);
 					hchisqLarge->Fill(fitdat[5]);
+					hchisqP->Fill(TMath::Prob(fitdat[5],1));
 				}
 
 				

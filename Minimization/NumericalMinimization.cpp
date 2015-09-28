@@ -61,6 +61,7 @@ double x1FitOld;
 double x2FitOld;
 
 double x1g,x2g,x3g;
+double dpsi1,dpsi2,dpsi3;
 
      
 
@@ -92,13 +93,13 @@ int NumericalMinimization(const char * minName = "Minuit2",
    // set tolerance , etc...
    min->SetMaxFunctionCalls(10000000); // for Minuit/Minuit2
    min->SetMaxIterations(10000000);  // for GSL
-   min->SetTolerance(0.0000001);
+   min->SetTolerance(0.00000001);
    min->SetPrintLevel(1);
 
    // create funciton wrapper for minmizer
    // a IMultiGenFunction type
    ROOT::Math::Functor f(&DalitzElimination,2);
-   double step[2] = {0.00001,0.00001};
+   double step[2] = {0.000001,0.000001};
    // starting point
 
    double variable[2] = { centerX1-offset1,centerX2-offset2};
@@ -152,14 +153,26 @@ int main(int argc, char* argv[]){
 	 M=atof(argv[2]);
 	//electron mass
  	 m_e=atof(argv[3]);
+
+	//initial momentum
+	double initP=atof(argv[4]);
 	
 	
 	TFile *froot = new TFile("../EventOutputs/ResultHistos.root", "UPDATE");
-	TH1D* hESum = new TH1D("hESum", "E1+E2+E3;pi0 Energy; Event per bin",100,9,11);
-	TH1D* hEfitSum = new TH1D("hEfitSum", "E1+E2+E3;pi0 Energy;Event per bin",100,9.92,10.07);
-	TH1D* hESumConstrained = new TH1D("hESumConstrained", "E1+E2+E3C;pi0 Energy; event per bin",100,9.92,10.07);
+	/*TH1D* hESum = new TH1D("hESum", "Measured Energy Sum E1+E2+E3;pi0 Energy; Event per bin",100,9,11);
+	TH1D* hEfitSum = new TH1D("hEfitSum", "Energy Sum from Minimization E1+E2+E3;pi0 Energy;Event per bin",100,9.92,10.07);
+	TH1D* hESumConstrained = new TH1D("hESumConstrained", "Minimimalist E1+E2+E3C;pi0 Energy; event per bin",100,9.92,10.07);*/
+
+	TH1D* hESum = new TH1D("hESum", "Measured Energy Sum E1+E2+E3;pi0 Energy; Event per bin",100,initP-0.5*initP,initP+0.5*initP);
+	TH1D* hEfitSum = new TH1D("hEfitSum", "Energy Sum from Minimization E1+E2+E3;pi0 Energy;Event per bin",100,initP-0.5*initP,initP+0.5*initP);
+	TH1D* hESumConstrained = new TH1D("hESumConstrained", "Minimimalist E1+E2+E3C;pi0 Energy; event per bin",100,initP-0.5*initP,initP+0.5*initP);
+	
 	TH1D* hEpiPull = new TH1D("hEpiPull", "pull distribution of pi0 energies; Epi_fit - Epi_m / sqrt(vfit-vm); event per bin",100,-5,5);
 	double EpiPull;
+
+	TH1D* hdpsix1 = new TH1D("hdpsix1","#delta#psi between generator and detector x1;Events per bin",100,-0.0,0.1);
+	TH1D* hdpsix2 = new TH1D("hdpsix2","#delta#psi between generator and detector x2;Events per bin",100,-0.0,0.1);
+	TH1D* hdpsix3 = new TH1D("hdpsix3","#delta#pis between generator and detector x3;Events per bin",100,-0.0,0.1);
 	
 	//each time the program is run the output which holds the fit values and uncertainties is wiped
 	ofstream cleaner("../EventOutputs/EventResults.txt");
@@ -172,11 +185,12 @@ int main(int argc, char* argv[]){
 	//TTREE initiliaztion///////////
 	TTree* tree = new TTree( "DalitzDecay" , "DalitzDecay");
 
+	
 	int evnum;
 	//TLorentzVector epg_4v, emg_4v, gmg_4v, epm_4v, emm_4v, gmm_4v;
 	TLorentzVector* genVects = new TLorentzVector[4]; //={epg_4v, emg_4v, gmg_4v};
 	TLorentzVector* mesVects = new TLorentzVector[4]; //={epm_4v, emm_4v, gmm_4v};
-	TLorentzVector epg_4v= h->evtP_actual[1].v;
+	//TLorentzVector epg_4v= h->evtP_actual[1].v;
 /*
 	for(int i=1; i<=3; i++){
 		genVects[i]=h->evtP_actual[i].v;
@@ -208,6 +222,9 @@ int main(int argc, char* argv[]){
 	tree->Branch("p2m.", &mesVects[2]);
 	tree->Branch("p3m.", &mesVects[3]);
         tree->Branch("minChisq", &minChisq);
+	tree->Branch("dpsi1", &dpsi1);
+	tree->Branch("dpsi2", &dpsi2);
+	tree->Branch("dpsi3", &dpsi3);
 
 	
 	//prepares the final output stream
@@ -324,6 +341,7 @@ int main(int argc, char* argv[]){
 
 		//outputs all data to results file
 		// data order x_im sigma_x_im x_ireal x_ifit sigma_x_ifit minimum X^2 value
+		f<<setprecision(9);
 		f<<"3"<<endl;
 		f<<h->evtP[1].x_m<<" "<<sqrt(variance1)<<" "<<h->evtP_actual[1].x_m<<" "<<x1Fit<<" "<<sqrt(x1FitVariance)<<" "<<minChisq<<endl;
 		f<<h->evtP[2].x_m<<" "<<sqrt(variance2)<<" "<<h->evtP_actual[2].x_m<<" "<<x2Fit<<" "<<sqrt(x2FitVariance)<<" "<<minChisq<<endl;
@@ -333,6 +351,23 @@ int main(int argc, char* argv[]){
 			genVects[i]=h->evtP_actual[i].v;
 			mesVects[i]=h->evtP[i].v;
 		}
+		//populate dpsi
+		
+		dpsi1 = mathUtility::safeAcos( mathUtility::getCosTheta(genVects[1],mesVects[1]) );
+		dpsi2 = mathUtility::safeAcos( mathUtility::getCosTheta(genVects[2],mesVects[2]) );
+		dpsi3 = mathUtility::safeAcos( mathUtility::getCosTheta(genVects[3],mesVects[3]) );
+		
+		cout<<setprecision(9);
+		if(dpsi3>= 3.14159/2){ 
+			cout<<"dpsi: "<< dpsi3<<endl;
+			PrintVector(genVects[3]);
+			PrintVector(mesVects[3]);
+			} 
+		hdpsix1->Fill(dpsi1);
+		hdpsix2->Fill(dpsi2);
+		hdpsix3->Fill(dpsi3);
+		
+		
 		tree->Fill();
 	}
 	froot->Write();

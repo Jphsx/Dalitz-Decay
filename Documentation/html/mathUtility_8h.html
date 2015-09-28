@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
-<title>DalitzDecay: /home/justin/work/SingleParticleGenerator/dalitz_decay/dalitz_chisq/mathUtility/mathUtility.h File Reference</title>
+<title>DalitzDecay: /home/justin/work/SingleParticleGenerator/dalitz_decay/mathUtility/mathUtility.h File Reference</title>
 <link href="doxygen.css" rel="stylesheet" type="text/css">
 <link href="tabs.css" rel="stylesheet" type="text/css">
 </head><body>
@@ -17,7 +17,7 @@
     <li><a href="files.html"><span>File&nbsp;List</span></a></li>
     <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
   </ul></div>
-<h1>/home/justin/work/SingleParticleGenerator/dalitz_decay/dalitz_chisq/mathUtility/mathUtility.h File Reference</h1><code>#include &quot;TLorentzVector.h&quot;</code><br>
+<h1>/home/justin/work/SingleParticleGenerator/dalitz_decay/mathUtility/mathUtility.h File Reference</h1><code>#include &quot;TLorentzVector.h&quot;</code><br>
 <code>#include &quot;<a class="el" href="vectorFactory_8h-source.html">../vectorFactory/vectorFactory.h</a>&quot;</code><br>
 <code>#include &lt;cmath&gt;</code><br>
 
@@ -67,6 +67,9 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemathUtility.html#f7c548f0002f12634d61b45d2f0a69d8">mathUtility::getX3constrained</a> (double x1, double x2, <a class="el" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p1, <a class="el" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p2, <a class="el" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p3)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A function that evaluates the energy of the photon in the event in terms of the positron and electron curvatures, angles between the particles and uses the pion mass constraint.  <a href="#f7c548f0002f12634d61b45d2f0a69d8"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemathUtility.html#06b88a5f39fcf79a65c2ea867ae57306">mathUtility::safeAcos</a> (double x)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A safer implementation of the arc cos function (as opposed to the standard library) which truncates values near the domain boudaries to avoid minor floating point errors which cause arc cos to return NaN.  <a href="#06b88a5f39fcf79a65c2ea867ae57306"></a><br></td></tr>
 <tr><td colspan="2"><br><h2>Variables</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">const double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemathUtility.html#15aa5c28185796c5cdcd276f72a8b188">mathUtility::M</a> = 0.13497</td></tr>
 
@@ -89,7 +92,7 @@
 
 </div>
 </div><p>
-<hr size="1"><address style="align: right;"><small>Generated on Thu Aug 13 17:39:33 2015 for DalitzDecay by&nbsp;
+<hr size="1"><address style="align: right;"><small>Generated on Mon Sep 28 15:55:01 2015 for DalitzDecay by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.7 </small></address>
 </body>

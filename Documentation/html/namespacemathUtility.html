@@ -59,6 +59,9 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemathUtility.html#f7c548f0002f12634d61b45d2f0a69d8">getX3constrained</a> (double x1, double x2, <a class="el" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p1, <a class="el" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p2, <a class="el" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p3)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A function that evaluates the energy of the photon in the event in terms of the positron and electron curvatures, angles between the particles and uses the pion mass constraint.  <a href="#f7c548f0002f12634d61b45d2f0a69d8"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemathUtility.html#06b88a5f39fcf79a65c2ea867ae57306">safeAcos</a> (double x)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">A safer implementation of the arc cos function (as opposed to the standard library) which truncates values near the domain boudaries to avoid minor floating point errors which cause arc cos to return NaN.  <a href="#06b88a5f39fcf79a65c2ea867ae57306"></a><br></td></tr>
 <tr><td colspan="2"><br><h2>Variables</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">const double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemathUtility.html#15aa5c28185796c5cdcd276f72a8b188">M</a> = 0.13497</td></tr>
 
@@ -125,6 +128,7 @@ Returns the variance of the input vector with a previously class defined particl
 <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>v</em>&nbsp;</td><td>The input "v_reg" 4 vector </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pid</em>&nbsp;</td><td>the particle ID of the vector v </td></tr>
   </table>
 </dl>
 
@@ -167,7 +171,8 @@ Returns the variance of particle based on the arguments given, 11,-11 will give 
 <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>pID</em>&nbsp;</td><td>the particle ID </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>xm</em>&nbsp;</td><td>the measured x value (xfit is the intended use)  the polar angle of the particle with respect to the z axis in the accelerator </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>xm</em>&nbsp;</td><td>the measured x value (xfit is the intended use) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>theta</em>&nbsp;</td><td>the polar angle of the particle with respect to the z axis in the accelerator </td></tr>
   </table>
 </dl>
 
@@ -489,6 +494,34 @@ A function that evaluates the energy of the photon in the event in terms of the 
 
 </div>
 </div><p>
+<a class="anchor" name="06b88a5f39fcf79a65c2ea867ae57306"></a><!-- doxytag: member="mathUtility::safeAcos" ref="06b88a5f39fcf79a65c2ea867ae57306" args="(double x)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double mathUtility::safeAcos           </td>
+          <td>(</td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>x</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+A safer implementation of the arc cos function (as opposed to the standard library) which truncates values near the domain boudaries to avoid minor floating point errors which cause arc cos to return NaN. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>x</em>&nbsp;</td><td>the argument to cos^-1 </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Returns:</b></dt><dd>the arc cosine of parameter x </dd></dl>
+
+</div>
+</div><p>
 <hr><h2>Variable Documentation</h2>
 <a class="anchor" name="15aa5c28185796c5cdcd276f72a8b188"></a><!-- doxytag: member="mathUtility::M" ref="15aa5c28185796c5cdcd276f72a8b188" args="" -->
 <div class="memitem">
@@ -520,7 +553,7 @@ A function that evaluates the energy of the photon in the event in terms of the 
 
 </div>
 </div><p>
-<hr size="1"><address style="align: right;"><small>Generated on Thu Aug 13 17:39:34 2015 for DalitzDecay by&nbsp;
+<hr size="1"><address style="align: right;"><small>Generated on Mon Sep 28 15:55:02 2015 for DalitzDecay by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.7 </small></address>
 </body>
