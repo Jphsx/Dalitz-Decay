@@ -9,6 +9,7 @@
 #include <string>
 #include "TH1D.h"
 #include "../mathUtility/mathUtility.h"
+#include <iomanip>
 //debugging single vector printing method
 void printVector(TLorentzVector v){
 			cout<<v.Px()<<" "<<v.Py()<<" "<<v.Pz()<<" "<<v.E()<<" "<<v.M()<<endl;
@@ -32,6 +33,8 @@ int main(int argc, char *argv[]){
 	double m_e = atof(argv[3]);
 	double initial_p = atof(argv[4]);
 	int chiCont = atoi(argv[5]);
+	double scaleParameterNP = atof(argv[6]);
+	
 
 
 	//In order to histogram the minimalist X^2 values later on we need a TH1D here, it can not be done in the DalitzChiSq class because TH1D can not be accessed as a class member.
@@ -86,6 +89,7 @@ int main(int argc, char *argv[]){
 		
 	
 		//write the unsmeared event to the unsmeared event file
+		f1<<setprecision(9);
 		f1<<3<<endl;
 		for(int i=1; i<=3; i++){
 			f1<< 1 <<" "<< evtP[i].pID << " " << 0 << " "<< 0 << " " << 0 << " "<< 0 << " ";
@@ -95,12 +99,61 @@ int main(int argc, char *argv[]){
 
 		//instance of Smearing class to smear the raw event
 		DalitzSmear* corruptor = new DalitzSmear();
-		//iterate over the particles in the event array, smear each one and then update the particle struct parameters
-		for(int i=1;i<=3;i++){
-			corruptor->setpid(evtP[i].pID);
-			evtP[i].v = corruptor->SmearVector(evtP[i].v);
-			updateObject(evtP[i]);
+		//if the directional smearing is not using the default parameters, set them according to input args
+		if(scaleParameterNP != 0){ 
+			corruptor->setScaleParameterNP(scaleParameterNP);
 		}
+		//iterate over the particles in the event array, smear each one and then update the particle struct parameters
+
+		//temp lorentz vector to throw out bad direction smears where somehow the dot product between generator and detector 4 vectors <0
+		TLorentzVector temp;
+		TLorentzVector magTemp;
+		for(int i=1;i<=3;i++){
+
+	
+			corruptor->setpid(evtP[i].pID);
+
+			
+			magTemp = corruptor->SmearVector(evtP[i].v);
+			while(mathUtility::getCosTheta(magTemp,evtP[i].v)<0.0){
+			//if cos(theta) between the generator and magnitude smeared vector is <0 then the smearing created a anitparallel vector
+			//that is, it smeared the energy into the negative range and reversed the direction of the photon
+			//so, try smearing it until it gets a good value that doesnt reverse the direction
+			
+				magTemp = corruptor->SmearVector(evtP[i].v);
+				
+			}
+			evtP[i].v = magTemp;
+			
+			updateObject(evtP[i]);
+			//second smear direction
+
+			//testing infastructure to try to not get negative dot products i.e. psi >= pi/2
+			cout<<setprecision(15);
+			temp = corruptor->smearDirection(evtP[i].v);
+			/*while(mathUtility::getCosTheta(evtP_actual[i].v,temp)<0.0){
+				//somehow it didnt work try again, evtP[i] is still generator level at this point
+				cout<< "cos theta : "<< mathUtility::getCosTheta(evtP_actual[i].v,temp)<<endl;
+				temp = corruptor->smearDirection(evtP[i].v);
+				cout<< " new cos theta : "<< mathUtility::getCosTheta(evtP_actual[i].v,temp)<<endl;
+			}*/
+			// set the good smeared direction vector into the particle object
+			evtP[i].v=temp;
+
+	
+			updateObject(evtP[i]);
+			//extra check to make sure everything went according to plan
+			cout<<setprecision(15);
+			if(mathUtility::getCosTheta(evtP_actual[i].v,evtP[i].v)<0.0){
+				cout<<"BAD DOT PRODUCT    "<<mathUtility::getCosTheta(evtP_actual[3].v,evtP[3].v)<<endl;
+				printVector(evtP[i].v);
+				printVector(evtP_actual[i].v);
+				printVector(magTemp);
+			}
+			
+		}
+	
+		
 		//printVectors(evtP);
 		//printVectors(evtP_actual);
 
@@ -112,13 +165,6 @@ int main(int argc, char *argv[]){
 		//checking to see if energy constraint looks good
 		 hE3constrained->Fill(mathUtility::getX3constrained(evtP[1].x_m,evtP[2].x_m,evtP[1],evtP[2],evtP[3]));
 
-		//quick copy of new particle array but where x3_m = the constrained energy
-		//vectorFactory::ParticleParameters* evtP_constrained;
-		//generator->copyObject(evtP,evtP_constrained);
-		//evtP_constrained[3].x_m = mathUtility::getX3constrained(evtP[1].x_m,evtP[2].x_m,evtP[1],evtP[2],evtP[3]);
-		//TLorentzVector constraintCheck = 
-	
-	
 
 		//create histogram of the minimalist X^2
 		hminchisq->Fill(chisq->getMinimalistChiSq(evtP[1], evtP[2], evtP[3]));
@@ -128,6 +174,7 @@ int main(int argc, char *argv[]){
 		}
 
 		//write the smeared event to the smeared event file
+		f2<<setprecision(9);
 		f2<<3<<endl;
 		for(int i=1; i<=3; i++){
 			f2<< 1 <<" "<< evtP[i].pID << " " << 0 << " "<< 0 << " " << 0 << " "<< 0 << " ";

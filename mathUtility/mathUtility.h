@@ -20,6 +20,7 @@ namespace mathUtility {
 			//! Returns the variance of the input vector with a previously class defined particle ID.  Same variance definition as the DalitzChiSq class. Used solely for finding the sigmas for gaussian number generation.
 			/*!
 			\param v The input "v_reg" 4 vector
+			\param pid the particle ID of the vector v
 			*/
 			 double getVariance(TLorentzVector v, int pid);
 			
@@ -27,7 +28,7 @@ namespace mathUtility {
 			/*!
 			\param pID the particle ID
 			\param xm the measured x value (xfit is the intended use)
-			\theta the polar angle of the particle with respect to the z axis in the accelerator
+			\param theta the polar angle of the particle with respect to the z axis in the accelerator
 			
 			*/
 			 double getVariance(int pID, double xm, double theta);
@@ -97,6 +98,15 @@ namespace mathUtility {
 			\return the photon constrained energy
 			*/
 			 double getX3constrained(double x1,double x2, pObject p1, pObject p2, pObject p3);
+			
+			
+			//! A safer implementation of the arc cos function (as opposed to the standard library) which truncates values near the domain boudaries to avoid minor floating point errors which cause arc cos to return NaN.
+			/*!
+			\param x the argument to cos^-1
+			\return the arc cosine of parameter x
+			*/
+			double safeAcos(double x);
+			
 			
 };
 #endif

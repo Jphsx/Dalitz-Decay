@@ -17,7 +17,13 @@ void \bf{setpid} (int id)
 TLorentz\-Vector \bf{Smear\-Vector} ()
 \begin{CompactList}\small\item\em Method that smears a 4 vector $\ast$NOTE$\ast$ v\_\-reg and pid global variables must already be set. \item\end{CompactList}\item 
 TLorentz\-Vector \bf{Smear\-Vector} (TLorentz\-Vector v)
-\begin{CompactList}\small\item\em Method that smears the argument 4 vector $\ast$NOTE$\ast$ the particle ID must be set before calling this method. \item\end{CompactList}\end{CompactItemize}
+\begin{CompactList}\small\item\em Method that smears the argument 4 vector $\ast$NOTE$\ast$ the particle ID must be set before calling this method. \item\end{CompactList}\item 
+TLorentz\-Vector \bf{smear\-Direction} (TLorentz\-Vector v)
+\begin{CompactList}\small\item\em Method that initiates the sequence of private calls that create a smeared vector v which is the direction smearing of unit vector u contained in input Tlorentz\-Vector v. \item\end{CompactList}\item 
+void \bf{set\-Scale\-Parameter\-NP} (double sigma)
+\begin{CompactList}\small\item\em method to set the scale parameter for neutral particle i.e. photon, default value is 1e-4 \item\end{CompactList}\item 
+void \bf{set\-Scale\-Parameter\-CP} (double sigma)
+\begin{CompactList}\small\item\em method to set the scale parameter for charged particle i.e. positron/electron, default value is 1e-6 \item\end{CompactList}\end{CompactItemize}
 \subsection*{Public Attributes}
 \begin{CompactItemize}
 \item 
@@ -37,7 +43,28 @@ int \bf{pid}
 double \bf{get\-Ptsm} (TLorentz\-Vector v)
 \begin{CompactList}\small\item\em Function that returns the smeared values for Pt, which is used for smearing each component of the v\_\-reg vector. \item\end{CompactList}\item 
 double \bf{get\-Gauss} (TLorentz\-Vector v)
-\begin{CompactList}\small\item\em Generates a random gaussian value for the input vector. If the associated particle ID is an electron or positron the gaussian mean is the curvature of the particle with its associated sigma. If the associated partice ID is a photon the gaussian mean is the measured photon energy with its associated sigma. \item\end{CompactList}\end{CompactItemize}
+\begin{CompactList}\small\item\em Generates a random gaussian value for the input vector. If the associated particle ID is an electron or positron the gaussian mean is the curvature of the particle with its associated sigma. If the associated partice ID is a photon the gaussian mean is the measured photon energy with its associated sigma. \item\end{CompactList}\item 
+TVector3 \bf{get\-Unit\-Vector} (double i, double j, double k)
+\begin{CompactList}\small\item\em Gives the unit vector from the associated input 3 vector. \item\end{CompactList}\item 
+double \bf{get\-Vector\-Magnitude} (double i, double j, double k)
+\begin{CompactList}\small\item\em Gives the magnitude vector of the input 3 vector. \item\end{CompactList}\item 
+TVector3 \bf{get\-Omega\_\-T} (TVector3 v\_\-1, TVector3 v\_\-n)
+\begin{CompactList}\small\item\em calculates the omega\_\-t unit vector, which is orthogonal to the original input vector to be smeared. The omega\_\-t vector dictates the direction on the plane normal to the orignal vector will be smeared. \item\end{CompactList}\item 
+TVector3 \bf{get\-V\_\-1} (TVector3 u\-Vector)
+\begin{CompactList}\small\item\em finds a vector v1 orthogonal to the original input vector u, and is intended to be a component of omega\_\-t \item\end{CompactList}\item 
+double \bf{get\-Scalar\-Product} (TVector3 v1, TVector3 v2)
+\begin{CompactList}\small\item\em calculates the dot product between to vectors v1 . v2 \item\end{CompactList}\item 
+TVector3 \bf{get\-Vector\-Product} (TVector3 v1, TVector3 v2)
+\begin{CompactList}\small\item\em calculates the cross product between to vectors v1 x v2 \item\end{CompactList}\item 
+double \bf{get\-Dpsi} (TLorentz\-Vector v)
+\begin{CompactList}\small\item\em calculates the angular deviaton dpsi for vector v based on a random deviate drawn from a Rayleigh distribution that depends on scale parameter sigma. The scale parameters selected depend on the particle's PID owned by the class at the time of smearing. i.e. the scale parameters for charged particles and neutral particles should be different. \item\end{CompactList}\end{CompactItemize}
+\subsection*{Private Attributes}
+\begin{CompactItemize}
+\item 
+double \bf{scale\-Parameter\-CP}
+\begin{CompactList}\small\item\em The scale parameter sigma for a charged particle, for drawing random deviates from rayleigh distribution. \item\end{CompactList}\item 
+double \bf{scale\-Parameter\-NP}
+\begin{CompactList}\small\item\em The scale parameter sigma for a neutral particle, for drawing random deviates from rayleigh distribution. \item\end{CompactList}\end{CompactItemize}
 
 
 \subsection{Detailed Description}
@@ -63,6 +90,20 @@ Constructor that sets the 4 vector to be smeared, and the particle ID associated
 
 
 \subsection{Member Function Documentation}
+\index{DalitzSmear@{Dalitz\-Smear}!getDpsi@{getDpsi}}
+\index{getDpsi@{getDpsi}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Dalitz\-Smear::get\-Dpsi (TLorentz\-Vector {\em v})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_63b59045fde437179ab561ea81d369aa}
+
+
+calculates the angular deviaton dpsi for vector v based on a random deviate drawn from a Rayleigh distribution that depends on scale parameter sigma. The scale parameters selected depend on the particle's PID owned by the class at the time of smearing. i.e. the scale parameters for charged particles and neutral particles should be different. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]The four momenta which direction is to be smeared. \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]angular deviation dpsi \end{Desc}
 \index{DalitzSmear@{Dalitz\-Smear}!getGauss@{getGauss}}
 \index{getGauss@{getGauss}!DalitzSmear@{Dalitz\-Smear}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Dalitz\-Smear::get\-Gauss (TLorentz\-Vector {\em v})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_18fa31b26891f1138adff5dea3a8f558}
@@ -75,6 +116,20 @@ Generates a random gaussian value for the input vector. If the associated partic
 \begin{description}
 \item[{\em v}]The input \char`\"{}v\_\-reg\char`\"{} 4 vector \end{description}
 \end{Desc}
+\index{DalitzSmear@{Dalitz\-Smear}!getOmega_T@{getOmega\_\-T}}
+\index{getOmega_T@{getOmega\_\-T}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TVector3 Dalitz\-Smear::get\-Omega\_\-T (TVector3 {\em v\_\-1}, TVector3 {\em v\_\-n})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_ba454a3cdff75924c7b2613813f1f111}
+
+
+calculates the omega\_\-t unit vector, which is orthogonal to the original input vector to be smeared. The omega\_\-t vector dictates the direction on the plane normal to the orignal vector will be smeared. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v\_\-1}]the quantity returned from get\-V\_\-1 \item[{\em v\_\-n}]a vector that is orthogonal to v\_\-1 and the original unit vector u \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the smearing direction unit 3 vector omega\_\-t \end{Desc}
 \index{DalitzSmear@{Dalitz\-Smear}!getPtsm@{getPtsm}}
 \index{getPtsm@{getPtsm}!DalitzSmear@{Dalitz\-Smear}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Dalitz\-Smear::get\-Ptsm (TLorentz\-Vector {\em v})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_811ae82c27b64f7049a3844148348cc9}
@@ -87,6 +142,62 @@ Function that returns the smeared values for Pt, which is used for smearing each
 \begin{description}
 \item[{\em v}]The input \char`\"{}v\_\-reg\char`\"{} 4 vector \end{description}
 \end{Desc}
+\index{DalitzSmear@{Dalitz\-Smear}!getScalarProduct@{getScalarProduct}}
+\index{getScalarProduct@{getScalarProduct}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Dalitz\-Smear::get\-Scalar\-Product (TVector3 {\em v1}, TVector3 {\em v2})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_dfdb5ad9e4c1397965474088bb01c480}
+
+
+calculates the dot product between to vectors v1 . v2 
+
+\index{DalitzSmear@{Dalitz\-Smear}!getUnitVector@{getUnitVector}}
+\index{getUnitVector@{getUnitVector}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TVector3 Dalitz\-Smear::get\-Unit\-Vector (double {\em i}, double {\em j}, double {\em k})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_c76e17e12e0cc4710c1682bd8b714f86}
+
+
+Gives the unit vector from the associated input 3 vector. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em i}]i component of (i,j,k) \item[{\em j}]j component of (i,j,k) \item[{\em k}]k component of (i,j,k) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the unit vector (i,j,k) \end{Desc}
+\index{DalitzSmear@{Dalitz\-Smear}!getV_1@{getV\_\-1}}
+\index{getV_1@{getV\_\-1}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TVector3 Dalitz\-Smear::get\-V\_\-1 (TVector3 {\em u\-Vector})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_63a8df4cff5fd53365540b5d0330b4d4}
+
+
+finds a vector v1 orthogonal to the original input vector u, and is intended to be a component of omega\_\-t 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em u\-Vector}]the original, to be smeared, unit vector \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]the omega\_\-t component v\_\-1 3 vector \end{Desc}
+\index{DalitzSmear@{Dalitz\-Smear}!getVectorMagnitude@{getVectorMagnitude}}
+\index{getVectorMagnitude@{getVectorMagnitude}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double Dalitz\-Smear::get\-Vector\-Magnitude (double {\em i}, double {\em j}, double {\em k})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_3cb72fe8ffc410b85b1d9c451954448a}
+
+
+Gives the magnitude vector of the input 3 vector. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em i}]i component of (i,j,k) \item[{\em j}]j component of (i,j,k) \item[{\em k}]k component of (i,j,k) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]vector magnitude \end{Desc}
+\index{DalitzSmear@{Dalitz\-Smear}!getVectorProduct@{getVectorProduct}}
+\index{getVectorProduct@{getVectorProduct}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TVector3 Dalitz\-Smear::get\-Vector\-Product (TVector3 {\em v1}, TVector3 {\em v2})\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_f21d38f7a616dcb5b865e873d64201f7}
+
+
+calculates the cross product between to vectors v1 x v2 
+
 \index{DalitzSmear@{Dalitz\-Smear}!setpid@{setpid}}
 \index{setpid@{setpid}!DalitzSmear@{Dalitz\-Smear}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Dalitz\-Smear::setpid (int {\em id})}\label{classDalitzSmear_63e8f796d9c84111327341c3eefec43a}
@@ -99,6 +210,34 @@ Method to set the particle ID.
 \begin{description}
 \item[{\em id}]the particle ID associated with the 4 vector that is intended to be smeared \end{description}
 \end{Desc}
+\index{DalitzSmear@{Dalitz\-Smear}!setScaleParameterCP@{setScaleParameterCP}}
+\index{setScaleParameterCP@{setScaleParameterCP}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Dalitz\-Smear::set\-Scale\-Parameter\-CP (double {\em sigma})}\label{classDalitzSmear_811167aba8628dd4812c3f8658bee112}
+
+
+method to set the scale parameter for charged particle i.e. positron/electron, default value is 1e-6 
+
+\index{DalitzSmear@{Dalitz\-Smear}!setScaleParameterNP@{setScaleParameterNP}}
+\index{setScaleParameterNP@{setScaleParameterNP}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Dalitz\-Smear::set\-Scale\-Parameter\-NP (double {\em sigma})}\label{classDalitzSmear_1713a1dab553950ee81262bec7affa0d}
+
+
+method to set the scale parameter for neutral particle i.e. photon, default value is 1e-4 
+
+\index{DalitzSmear@{Dalitz\-Smear}!smearDirection@{smearDirection}}
+\index{smearDirection@{smearDirection}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector Dalitz\-Smear::smear\-Direction (TLorentz\-Vector {\em v})}\label{classDalitzSmear_581c50a4d6c7694f1d59294e09a9201d}
+
+
+Method that initiates the sequence of private calls that create a smeared vector v which is the direction smearing of unit vector u contained in input Tlorentz\-Vector v. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em v}]the input four momenta to have direction smeared \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]direction smeared 4 vector \end{Desc}
 \index{DalitzSmear@{Dalitz\-Smear}!SmearVector@{SmearVector}}
 \index{SmearVector@{SmearVector}!DalitzSmear@{Dalitz\-Smear}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector Dalitz\-Smear::Smear\-Vector (TLorentz\-Vector {\em v})}\label{classDalitzSmear_ae475bf2bea39d1ff580ad0e3ddaa71a}
@@ -142,6 +281,20 @@ Charge, used only electron(-1) and positron(+1).
 
 Local copy of random number generator used for generating gaussian values. 
 
+\index{DalitzSmear@{Dalitz\-Smear}!scaleParameterCP@{scaleParameterCP}}
+\index{scaleParameterCP@{scaleParameterCP}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double \bf{Dalitz\-Smear::scale\-Parameter\-CP}\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_1ddd88ddea64ea384154ddf4a60d5574}
+
+
+The scale parameter sigma for a charged particle, for drawing random deviates from rayleigh distribution. 
+
+\index{DalitzSmear@{Dalitz\-Smear}!scaleParameterNP@{scaleParameterNP}}
+\index{scaleParameterNP@{scaleParameterNP}!DalitzSmear@{Dalitz\-Smear}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double \bf{Dalitz\-Smear::scale\-Parameter\-NP}\hspace{0.3cm}{\tt  [private]}}\label{classDalitzSmear_7449e92c38450dc5d233046e9866100c}
+
+
+The scale parameter sigma for a neutral particle, for drawing random deviates from rayleigh distribution. 
+
 \index{DalitzSmear@{Dalitz\-Smear}!v_reg@{v\_\-reg}}
 \index{v_reg@{v\_\-reg}!DalitzSmear@{Dalitz\-Smear}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}TLorentz\-Vector \bf{Dalitz\-Smear::v\_\-reg}}\label{classDalitzSmear_9340d830c97814a02c2b2749e924abc8}
@@ -160,4 +313,4 @@ Locally stored 4 vector which is the smeared version of v\_\-reg.
 
 The documentation for this class was generated from the following file:\begin{CompactItemize}
 \item 
-/home/justin/work/Single\-Particle\-Generator/dalitz\_\-decay/dalitz\_\-chisq/Smearing/\bf{Dalitz\-Smear.h}\end{CompactItemize}
+/home/justin/work/Single\-Particle\-Generator/dalitz\_\-decay/Smearing/\bf{Dalitz\-Smear.h}\end{CompactItemize}

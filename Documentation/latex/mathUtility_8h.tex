@@ -1,5 +1,5 @@
-\section{/home/justin/work/Single\-Particle\-Generator/dalitz\_\-decay/dalitz\_\-chisq/math\-Utility/math\-Utility.h File Reference}
-\label{mathUtility_8h}\index{/home/justin/work/SingleParticleGenerator/dalitz_decay/dalitz_chisq/mathUtility/mathUtility.h@{/home/justin/work/SingleParticleGenerator/dalitz\_\-decay/dalitz\_\-chisq/mathUtility/mathUtility.h}}
+\section{/home/justin/work/Single\-Particle\-Generator/dalitz\_\-decay/math\-Utility/math\-Utility.h File Reference}
+\label{mathUtility_8h}\index{/home/justin/work/SingleParticleGenerator/dalitz_decay/mathUtility/mathUtility.h@{/home/justin/work/SingleParticleGenerator/dalitz\_\-decay/mathUtility/mathUtility.h}}
 {\tt \#include \char`\"{}TLorentz\-Vector.h\char`\"{}}\par
 {\tt \#include \char`\"{}../vector\-Factory/vector\-Factory.h\char`\"{}}\par
 {\tt \#include $<$cmath$>$}\par
@@ -39,7 +39,9 @@ double \bf{math\-Utility::get\-Phi} (TLorentz\-Vector v)
 double \bf{math\-Utility::get\-Pt} (TLorentz\-Vector v)
 \begin{CompactList}\small\item\em Function that gets the scalar magnitude of the x and y components of an input 4vector. \item\end{CompactList}\item 
 double \bf{math\-Utility::get\-X3constrained} (double x1, double x2, \bf{p\-Object} p1, \bf{p\-Object} p2, \bf{p\-Object} p3)
-\begin{CompactList}\small\item\em A function that evaluates the energy of the photon in the event in terms of the positron and electron curvatures, angles between the particles and uses the pion mass constraint. \item\end{CompactList}\end{CompactItemize}
+\begin{CompactList}\small\item\em A function that evaluates the energy of the photon in the event in terms of the positron and electron curvatures, angles between the particles and uses the pion mass constraint. \item\end{CompactList}\item 
+double \bf{math\-Utility::safe\-Acos} (double x)
+\begin{CompactList}\small\item\em A safer implementation of the arc cos function (as opposed to the standard library) which truncates values near the domain boudaries to avoid minor floating point errors which cause arc cos to return Na\-N. \item\end{CompactList}\end{CompactItemize}
 \subsection*{Variables}
 \begin{CompactItemize}
 \item 

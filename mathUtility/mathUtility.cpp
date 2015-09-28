@@ -65,4 +65,10 @@ double mathUtility::getX3constrained(double x1,double x2, pObject p1, pObject p2
 	double bottomterm = ( (getZ13(p1,p3)/(sin(p1.theta) * x1)) + (getZ23(p2,p3)/(sin(p2.theta) * x2)) );
 	return topterm/bottomterm;
 }
+//limits the domain to avoid floating point error
+double mathUtility::safeAcos(double x){
+	if (x < -1.0) x = -1.0 ;
+	else if (x > 1.0) x = 1.0 ;
+	return acos (x) ;
+ }
 //int main(){}

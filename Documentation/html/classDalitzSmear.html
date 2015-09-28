@@ -40,6 +40,15 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">TLorentzVector&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#ae475bf2bea39d1ff580ad0e3ddaa71a">SmearVector</a> (TLorentzVector v)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Method that smears the argument 4 vector *NOTE* the particle ID must be set before calling this method.  <a href="#ae475bf2bea39d1ff580ad0e3ddaa71a"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">TLorentzVector&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#581c50a4d6c7694f1d59294e09a9201d">smearDirection</a> (TLorentzVector v)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Method that initiates the sequence of private calls that create a smeared vector v which is the direction smearing of unit vector u contained in input TlorentzVector v.  <a href="#581c50a4d6c7694f1d59294e09a9201d"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#1713a1dab553950ee81262bec7affa0d">setScaleParameterNP</a> (double sigma)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">method to set the scale parameter for neutral particle i.e. photon, default value is 1e-4  <a href="#1713a1dab553950ee81262bec7affa0d"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#811167aba8628dd4812c3f8658bee112">setScaleParameterCP</a> (double sigma)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">method to set the scale parameter for charged particle i.e. positron/electron, default value is 1e-6  <a href="#811167aba8628dd4812c3f8658bee112"></a><br></td></tr>
 <tr><td colspan="2"><br><h2>Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">TRandom1 *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#bfb2d568818dbaa7db9936a52bd9c079">RNG</a></td></tr>
 
@@ -63,6 +72,34 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#18fa31b26891f1138adff5dea3a8f558">getGauss</a> (TLorentzVector v)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Generates a random gaussian value for the input vector. If the associated particle ID is an electron or positron the gaussian mean is the curvature of the particle with its associated sigma. If the associated partice ID is a photon the gaussian mean is the measured photon energy with its associated sigma.  <a href="#18fa31b26891f1138adff5dea3a8f558"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">TVector3&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#c76e17e12e0cc4710c1682bd8b714f86">getUnitVector</a> (double i, double j, double k)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gives the unit vector from the associated input 3 vector.  <a href="#c76e17e12e0cc4710c1682bd8b714f86"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#3cb72fe8ffc410b85b1d9c451954448a">getVectorMagnitude</a> (double i, double j, double k)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gives the magnitude vector of the input 3 vector.  <a href="#3cb72fe8ffc410b85b1d9c451954448a"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">TVector3&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#ba454a3cdff75924c7b2613813f1f111">getOmega_T</a> (TVector3 v_1, TVector3 v_n)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">calculates the omega_t unit vector, which is orthogonal to the original input vector to be smeared. The omega_t vector dictates the direction on the plane normal to the orignal vector will be smeared.  <a href="#ba454a3cdff75924c7b2613813f1f111"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">TVector3&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#63a8df4cff5fd53365540b5d0330b4d4">getV_1</a> (TVector3 uVector)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">finds a vector v1 orthogonal to the original input vector u, and is intended to be a component of omega_t  <a href="#63a8df4cff5fd53365540b5d0330b4d4"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#dfdb5ad9e4c1397965474088bb01c480">getScalarProduct</a> (TVector3 v1, TVector3 v2)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">calculates the dot product between to vectors v1 . v2  <a href="#dfdb5ad9e4c1397965474088bb01c480"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">TVector3&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#f21d38f7a616dcb5b865e873d64201f7">getVectorProduct</a> (TVector3 v1, TVector3 v2)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">calculates the cross product between to vectors v1 x v2  <a href="#f21d38f7a616dcb5b865e873d64201f7"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#63b59045fde437179ab561ea81d369aa">getDpsi</a> (TLorentzVector v)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">calculates the angular deviaton dpsi for vector v based on a random deviate drawn from a Rayleigh distribution that depends on scale parameter sigma. The scale parameters selected depend on the particle's PID owned by the class at the time of smearing. i.e. the scale parameters for charged particles and neutral particles should be different.  <a href="#63b59045fde437179ab561ea81d369aa"></a><br></td></tr>
+<tr><td colspan="2"><br><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#1ddd88ddea64ea384154ddf4a60d5574">scaleParameterCP</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The scale parameter sigma for a charged particle, for drawing random deviates from rayleigh distribution.  <a href="#1ddd88ddea64ea384154ddf4a60d5574"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDalitzSmear.html#7449e92c38450dc5d233046e9866100c">scaleParameterNP</a></td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">The scale parameter sigma for a neutral particle, for drawing random deviates from rayleigh distribution.  <a href="#7449e92c38450dc5d233046e9866100c"></a><br></td></tr>
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
 Class that takes in a 4vector and smears it, each vector both smeared and unsmeared is stored locally, and the class requires the particle id to be seperately supplied to the class (where it is also stored locally). 
@@ -121,6 +158,34 @@ Constructor that sets the 4 vector to be smeared, and the particle ID associated
 </div>
 </div><p>
 <hr><h2>Member Function Documentation</h2>
+<a class="anchor" name="63b59045fde437179ab561ea81d369aa"></a><!-- doxytag: member="DalitzSmear::getDpsi" ref="63b59045fde437179ab561ea81d369aa" args="(TLorentzVector v)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double DalitzSmear::getDpsi           </td>
+          <td>(</td>
+          <td class="paramtype">TLorentzVector&nbsp;</td>
+          <td class="paramname"> <em>v</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+calculates the angular deviaton dpsi for vector v based on a random deviate drawn from a Rayleigh distribution that depends on scale parameter sigma. The scale parameters selected depend on the particle's PID owned by the class at the time of smearing. i.e. the scale parameters for charged particles and neutral particles should be different. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>v</em>&nbsp;</td><td>The four momenta which direction is to be smeared. </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Returns:</b></dt><dd>angular deviation dpsi </dd></dl>
+
+</div>
+</div><p>
 <a class="anchor" name="18fa31b26891f1138adff5dea3a8f558"></a><!-- doxytag: member="DalitzSmear::getGauss" ref="18fa31b26891f1138adff5dea3a8f558" args="(TLorentzVector v)" -->
 <div class="memitem">
 <div class="memproto">
@@ -145,6 +210,44 @@ Generates a random gaussian value for the input vector. If the associated partic
     <tr><td valign="top"></td><td valign="top"><em>v</em>&nbsp;</td><td>The input "v_reg" 4 vector </td></tr>
   </table>
 </dl>
+
+</div>
+</div><p>
+<a class="anchor" name="ba454a3cdff75924c7b2613813f1f111"></a><!-- doxytag: member="DalitzSmear::getOmega_T" ref="ba454a3cdff75924c7b2613813f1f111" args="(TVector3 v_1, TVector3 v_n)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TVector3 DalitzSmear::getOmega_T           </td>
+          <td>(</td>
+          <td class="paramtype">TVector3&nbsp;</td>
+          <td class="paramname"> <em>v_1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TVector3&nbsp;</td>
+          <td class="paramname"> <em>v_n</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td width="100%"><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+calculates the omega_t unit vector, which is orthogonal to the original input vector to be smeared. The omega_t vector dictates the direction on the plane normal to the orignal vector will be smeared. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>v_1</em>&nbsp;</td><td>the quantity returned from getV_1 </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>v_n</em>&nbsp;</td><td>a vector that is orthogonal to v_1 and the original unit vector u </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Returns:</b></dt><dd>the smearing direction unit 3 vector omega_t </dd></dl>
 
 </div>
 </div><p>
@@ -175,6 +278,186 @@ Function that returns the smeared values for Pt, which is used for smearing each
 
 </div>
 </div><p>
+<a class="anchor" name="dfdb5ad9e4c1397965474088bb01c480"></a><!-- doxytag: member="DalitzSmear::getScalarProduct" ref="dfdb5ad9e4c1397965474088bb01c480" args="(TVector3 v1, TVector3 v2)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double DalitzSmear::getScalarProduct           </td>
+          <td>(</td>
+          <td class="paramtype">TVector3&nbsp;</td>
+          <td class="paramname"> <em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TVector3&nbsp;</td>
+          <td class="paramname"> <em>v2</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td width="100%"><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+calculates the dot product between to vectors v1 . v2 
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="c76e17e12e0cc4710c1682bd8b714f86"></a><!-- doxytag: member="DalitzSmear::getUnitVector" ref="c76e17e12e0cc4710c1682bd8b714f86" args="(double i, double j, double k)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TVector3 DalitzSmear::getUnitVector           </td>
+          <td>(</td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>k</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td width="100%"><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Gives the unit vector from the associated input 3 vector. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>i component of (i,j,k) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>j</em>&nbsp;</td><td>j component of (i,j,k) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>k</em>&nbsp;</td><td>k component of (i,j,k) </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Returns:</b></dt><dd>the unit vector (i,j,k) </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="63a8df4cff5fd53365540b5d0330b4d4"></a><!-- doxytag: member="DalitzSmear::getV_1" ref="63a8df4cff5fd53365540b5d0330b4d4" args="(TVector3 uVector)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TVector3 DalitzSmear::getV_1           </td>
+          <td>(</td>
+          <td class="paramtype">TVector3&nbsp;</td>
+          <td class="paramname"> <em>uVector</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+finds a vector v1 orthogonal to the original input vector u, and is intended to be a component of omega_t 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>uVector</em>&nbsp;</td><td>the original, to be smeared, unit vector </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Returns:</b></dt><dd>the omega_t component v_1 3 vector </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="3cb72fe8ffc410b85b1d9c451954448a"></a><!-- doxytag: member="DalitzSmear::getVectorMagnitude" ref="3cb72fe8ffc410b85b1d9c451954448a" args="(double i, double j, double k)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double DalitzSmear::getVectorMagnitude           </td>
+          <td>(</td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>k</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td width="100%"><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Gives the magnitude vector of the input 3 vector. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>i component of (i,j,k) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>j</em>&nbsp;</td><td>j component of (i,j,k) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>k</em>&nbsp;</td><td>k component of (i,j,k) </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Returns:</b></dt><dd>vector magnitude </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="f21d38f7a616dcb5b865e873d64201f7"></a><!-- doxytag: member="DalitzSmear::getVectorProduct" ref="f21d38f7a616dcb5b865e873d64201f7" args="(TVector3 v1, TVector3 v2)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TVector3 DalitzSmear::getVectorProduct           </td>
+          <td>(</td>
+          <td class="paramtype">TVector3&nbsp;</td>
+          <td class="paramname"> <em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TVector3&nbsp;</td>
+          <td class="paramname"> <em>v2</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td width="100%"><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+calculates the cross product between to vectors v1 x v2 
+<p>
+
+</div>
+</div><p>
 <a class="anchor" name="63e8f796d9c84111327341c3eefec43a"></a><!-- doxytag: member="DalitzSmear::setpid" ref="63e8f796d9c84111327341c3eefec43a" args="(int id)" -->
 <div class="memitem">
 <div class="memproto">
@@ -199,6 +482,78 @@ Method to set the particle ID.
     <tr><td valign="top"></td><td valign="top"><em>id</em>&nbsp;</td><td>the particle ID associated with the 4 vector that is intended to be smeared </td></tr>
   </table>
 </dl>
+
+</div>
+</div><p>
+<a class="anchor" name="811167aba8628dd4812c3f8658bee112"></a><!-- doxytag: member="DalitzSmear::setScaleParameterCP" ref="811167aba8628dd4812c3f8658bee112" args="(double sigma)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DalitzSmear::setScaleParameterCP           </td>
+          <td>(</td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>sigma</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+method to set the scale parameter for charged particle i.e. positron/electron, default value is 1e-6 
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="1713a1dab553950ee81262bec7affa0d"></a><!-- doxytag: member="DalitzSmear::setScaleParameterNP" ref="1713a1dab553950ee81262bec7affa0d" args="(double sigma)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DalitzSmear::setScaleParameterNP           </td>
+          <td>(</td>
+          <td class="paramtype">double&nbsp;</td>
+          <td class="paramname"> <em>sigma</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+method to set the scale parameter for neutral particle i.e. photon, default value is 1e-4 
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="581c50a4d6c7694f1d59294e09a9201d"></a><!-- doxytag: member="DalitzSmear::smearDirection" ref="581c50a4d6c7694f1d59294e09a9201d" args="(TLorentzVector v)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TLorentzVector DalitzSmear::smearDirection           </td>
+          <td>(</td>
+          <td class="paramtype">TLorentzVector&nbsp;</td>
+          <td class="paramname"> <em>v</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Method that initiates the sequence of private calls that create a smeared vector v which is the direction smearing of unit vector u contained in input TlorentzVector v. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>v</em>&nbsp;</td><td>the input four momenta to have direction smeared </td></tr>
+  </table>
+</dl>
+<dl compact><dt><b>Returns:</b></dt><dd>direction smeared 4 vector </dd></dl>
 
 </div>
 </div><p>
@@ -302,6 +657,40 @@ Local copy of random number generator used for generating gaussian values.
 
 </div>
 </div><p>
+<a class="anchor" name="1ddd88ddea64ea384154ddf4a60d5574"></a><!-- doxytag: member="DalitzSmear::scaleParameterCP" ref="1ddd88ddea64ea384154ddf4a60d5574" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classDalitzSmear.html#1ddd88ddea64ea384154ddf4a60d5574">DalitzSmear::scaleParameterCP</a><code> [private]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+The scale parameter sigma for a charged particle, for drawing random deviates from rayleigh distribution. 
+<p>
+
+</div>
+</div><p>
+<a class="anchor" name="7449e92c38450dc5d233046e9866100c"></a><!-- doxytag: member="DalitzSmear::scaleParameterNP" ref="7449e92c38450dc5d233046e9866100c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classDalitzSmear.html#7449e92c38450dc5d233046e9866100c">DalitzSmear::scaleParameterNP</a><code> [private]</code>          </td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+The scale parameter sigma for a neutral particle, for drawing random deviates from rayleigh distribution. 
+<p>
+
+</div>
+</div><p>
 <a class="anchor" name="9340d830c97814a02c2b2749e924abc8"></a><!-- doxytag: member="DalitzSmear::v_reg" ref="9340d830c97814a02c2b2749e924abc8" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -337,8 +726,8 @@ Locally stored 4 vector which is the smeared version of v_reg.
 </div>
 </div><p>
 <hr>The documentation for this class was generated from the following file:<ul>
-<li>/home/justin/work/SingleParticleGenerator/dalitz_decay/dalitz_chisq/Smearing/<a class="el" href="DalitzSmear_8h-source.html">DalitzSmear.h</a></ul>
-<hr size="1"><address style="align: right;"><small>Generated on Thu Aug 13 17:39:34 2015 for DalitzDecay by&nbsp;
+<li>/home/justin/work/SingleParticleGenerator/dalitz_decay/Smearing/<a class="el" href="DalitzSmear_8h-source.html">DalitzSmear.h</a></ul>
+<hr size="1"><address style="align: right;"><small>Generated on Mon Sep 28 15:55:01 2015 for DalitzDecay by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.7 </small></address>
 </body>

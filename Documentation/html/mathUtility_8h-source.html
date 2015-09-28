@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head><meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
-<title>DalitzDecay: /home/justin/work/SingleParticleGenerator/dalitz_decay/dalitz_chisq/mathUtility/mathUtility.h Source File</title>
+<title>DalitzDecay: /home/justin/work/SingleParticleGenerator/dalitz_decay/mathUtility/mathUtility.h Source File</title>
 <link href="doxygen.css" rel="stylesheet" type="text/css">
 <link href="tabs.css" rel="stylesheet" type="text/css">
 </head><body>
@@ -17,7 +17,7 @@
     <li><a href="files.html"><span>File&nbsp;List</span></a></li>
     <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
   </ul></div>
-<h1>/home/justin/work/SingleParticleGenerator/dalitz_decay/dalitz_chisq/mathUtility/mathUtility.h</h1><a href="mathUtility_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef _DALITZ_MATH_</span>
+<h1>/home/justin/work/SingleParticleGenerator/dalitz_decay/mathUtility/mathUtility.h</h1><a href="mathUtility_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef _DALITZ_MATH_</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define _DALITZ_MATH_</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#include "TLorentzVector.h"</span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include "../vectorFactory/vectorFactory.h"</span>
@@ -33,43 +33,48 @@
 <a name="l00018"></a>00018                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#4dc7410a0fb1ec53e669ef0f8ae71aaa">getVariance</a>(<a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p);
 <a name="l00019"></a>00019 
 <a name="l00021"></a>00021 
-<a name="l00024"></a>00024                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#4dc7410a0fb1ec53e669ef0f8ae71aaa">getVariance</a>(TLorentzVector v, <span class="keywordtype">int</span> pid);
-<a name="l00025"></a>00025                         
-<a name="l00027"></a>00027 
-<a name="l00033"></a>00033                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#4dc7410a0fb1ec53e669ef0f8ae71aaa">getVariance</a>(<span class="keywordtype">int</span> pID, <span class="keywordtype">double</span> xm, <span class="keywordtype">double</span> theta);
-<a name="l00034"></a>00034 
-<a name="l00036"></a>00036 
-<a name="l00040"></a>00040                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#36b379bf444fe94e782817c45658945c">getZ12</a>(<a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p1, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p2);
-<a name="l00041"></a>00041                          
-<a name="l00043"></a>00043 
-<a name="l00047"></a>00047                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#060d92e0729e065c300b759bf55c1ea7">getZ23</a>(<a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p2, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p3);
-<a name="l00048"></a>00048                         
-<a name="l00050"></a>00050 
-<a name="l00054"></a>00054                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#0cbaaf060ee289aab72880d49b478790">getZ13</a>(<a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p1, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p3);
-<a name="l00055"></a>00055 
-<a name="l00057"></a>00057 
-<a name="l00062"></a>00062                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#ffc66d5edd75953a2e69b0a463520875">getCosTheta</a>(TLorentzVector v1, TLorentzVector v2);
-<a name="l00063"></a>00063 
+<a name="l00025"></a>00025                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#4dc7410a0fb1ec53e669ef0f8ae71aaa">getVariance</a>(TLorentzVector v, <span class="keywordtype">int</span> pid);
+<a name="l00026"></a>00026                         
+<a name="l00028"></a>00028 
+<a name="l00034"></a>00034                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#4dc7410a0fb1ec53e669ef0f8ae71aaa">getVariance</a>(<span class="keywordtype">int</span> pID, <span class="keywordtype">double</span> xm, <span class="keywordtype">double</span> theta);
+<a name="l00035"></a>00035 
+<a name="l00037"></a>00037 
+<a name="l00041"></a>00041                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#36b379bf444fe94e782817c45658945c">getZ12</a>(<a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p1, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p2);
+<a name="l00042"></a>00042                          
+<a name="l00044"></a>00044 
+<a name="l00048"></a>00048                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#060d92e0729e065c300b759bf55c1ea7">getZ23</a>(<a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p2, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p3);
+<a name="l00049"></a>00049                         
+<a name="l00051"></a>00051 
+<a name="l00055"></a>00055                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#0cbaaf060ee289aab72880d49b478790">getZ13</a>(<a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p1, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p3);
+<a name="l00056"></a>00056 
+<a name="l00058"></a>00058 
+<a name="l00063"></a>00063                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#ffc66d5edd75953a2e69b0a463520875">getCosTheta</a>(TLorentzVector v1, TLorentzVector v2);
 <a name="l00064"></a>00064 
-<a name="l00065"></a>00065                         
-<a name="l00067"></a>00067 
-<a name="l00070"></a>00070                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#c20e62da2c47b4c024f9ad71b21e2d83">getTheta</a>(TLorentzVector v);
-<a name="l00071"></a>00071 
-<a name="l00073"></a>00073 
-<a name="l00076"></a>00076                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#d39157609ed4c41cc77f2606fc724381">get_p</a>(TLorentzVector v);
-<a name="l00077"></a>00077 
-<a name="l00079"></a>00079 
-<a name="l00082"></a>00082                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#d2bc2aa9ad332288ee959e7ef08b173e">getPhi</a>(TLorentzVector v);
-<a name="l00083"></a>00083 
-<a name="l00085"></a>00085 
-<a name="l00088"></a>00088                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#5ada42b91a8d830820e4fbb2b985035d">getPt</a>(TLorentzVector v);
-<a name="l00089"></a>00089 
-<a name="l00091"></a>00091 
-<a name="l00099"></a>00099                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#f7c548f0002f12634d61b45d2f0a69d8">getX3constrained</a>(<span class="keywordtype">double</span> x1,<span class="keywordtype">double</span> x2, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p1, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p2, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p3);
-<a name="l00100"></a>00100                         
-<a name="l00101"></a>00101 };
-<a name="l00102"></a>00102 <span class="preprocessor">#endif</span>
-</pre></div><hr size="1"><address style="align: right;"><small>Generated on Thu Aug 13 17:39:33 2015 for DalitzDecay by&nbsp;
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066                         
+<a name="l00068"></a>00068 
+<a name="l00071"></a>00071                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#c20e62da2c47b4c024f9ad71b21e2d83">getTheta</a>(TLorentzVector v);
+<a name="l00072"></a>00072 
+<a name="l00074"></a>00074 
+<a name="l00077"></a>00077                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#d39157609ed4c41cc77f2606fc724381">get_p</a>(TLorentzVector v);
+<a name="l00078"></a>00078 
+<a name="l00080"></a>00080 
+<a name="l00083"></a>00083                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#d2bc2aa9ad332288ee959e7ef08b173e">getPhi</a>(TLorentzVector v);
+<a name="l00084"></a>00084 
+<a name="l00086"></a>00086 
+<a name="l00089"></a>00089                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#5ada42b91a8d830820e4fbb2b985035d">getPt</a>(TLorentzVector v);
+<a name="l00090"></a>00090 
+<a name="l00092"></a>00092 
+<a name="l00100"></a>00100                          <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#f7c548f0002f12634d61b45d2f0a69d8">getX3constrained</a>(<span class="keywordtype">double</span> x1,<span class="keywordtype">double</span> x2, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p1, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p2, <a class="code" href="structvectorFactory_1_1ParticleParameters.html">pObject</a> p3);
+<a name="l00101"></a>00101                         
+<a name="l00102"></a>00102                         
+<a name="l00104"></a>00104 
+<a name="l00108"></a>00108                         <span class="keywordtype">double</span> <a class="code" href="namespacemathUtility.html#06b88a5f39fcf79a65c2ea867ae57306">safeAcos</a>(<span class="keywordtype">double</span> x);
+<a name="l00109"></a>00109                         
+<a name="l00110"></a>00110                 `       
+<a name="l00111"></a>00111 };
+<a name="l00112"></a>00112 <span class="preprocessor">#endif</span>
+</pre></div><hr size="1"><address style="align: right;"><small>Generated on Mon Sep 28 15:55:01 2015 for DalitzDecay by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.4.7 </small></address>
 </body>
