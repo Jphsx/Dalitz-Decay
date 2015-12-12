@@ -13,8 +13,8 @@ class ResultInterpreter{
 	public:
 		
 		
-		ResultInterpreter(const char* file1, int Nevs);
-		void makeHistos(int Nevs, ifstream& f1);
+		ResultInterpreter(const char* file1, int Nevs, double initP, const char* targetrootfile);
+		void makeHistos(int Nevs, ifstream& f1, double initP, const char* targetrootfile);
 		
 	
 };

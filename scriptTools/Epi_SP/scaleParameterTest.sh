@@ -3,13 +3,13 @@
 
 maxSigma=.001
 minSigma=.000001
-stepSize=1.5
+stepSize=2.5
 
 
 M="0.13497"
 m_e="0.000511"
 initP="10.0"
-Nevs="10000"
+Nevs="1000"
 #scaleParameterNP="-1" #leaves scale parameters to default in directional smearing
 chiCont="0" #0:false 1:True
 US_CMplot="-1" #mode 0 plots CM event
@@ -45,7 +45,7 @@ do
 	cd plotTools/ResultInterpreter
 
 	#plot the pull distributions with this result interpreter program
-	./hist ../../EventOutputs/EventResults.txt $Nevs
+	./hist ../../EventOutputs/EventResults.txt $Nevs $initP ../../EventOutputs/ResultHistos.root
 
 	cd ../../scriptTools/Epi_SP
 	##ADD CODE--------

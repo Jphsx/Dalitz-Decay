@@ -3,6 +3,7 @@
 #include "TLorentzVector.h"
 #include "../vectorFactory/vectorFactory.h"
 #include <cmath>
+#include <iostream>
 
 typedef vectorFactory::ParticleParameters pObject;
 //! Namespace that combines all the common Dalitz Math Utilities overloaded to support multiple class usage e.g. finding variances or angular quantities of vectors
@@ -95,7 +96,7 @@ namespace mathUtility {
 			\param p1 the particle struct of the positron
 			\param p2 the particle struct of the electron
 			\param p3 the particle struct of the photon
-			\return the photon constrained energy
+			\return the photon constrained energy for Minimalist/Elimination
 			*/
 			 double getX3constrained(double x1,double x2, pObject p1, pObject p2, pObject p3);
 			
@@ -106,7 +107,35 @@ namespace mathUtility {
 			\return the arc cosine of parameter x
 			*/
 			double safeAcos(double x);
+		
+			//! A function that evaluates the energy of the photon with the pion mass constraint, the dielectron mass and the opening angle between the dielectron and the photon.
+			/*!
+			\param p1 the particle struct of the positron
+			\param p2 the particle struct of the electron
+			\param p3 the particle struct of the photon
+			\return the photon constrained energy for Minimalist2
+			*/
+			double getX3constrainedMin2(pObject p1, pObject p2, pObject p3 );
+			//! A function that evaluates the energy of the photon with the pion mass constraint, the dielectron mass and the opening angle between the dielectron and the photon.
+			/*!
+			\param v12 the sum of four vectors of the electron and positron
+			\param v3 four vector for photon
+			\return the photon constrained energy for Minimalist2
+			*/
+			double getX3constrainedMin2(TLorentzVector v12, TLorentzVector v3);
+			//! A function that evaluates the energy of the photon with the pion mass constraint, the dielectron mass and the opening angle between the dielectron and the photon.
+			/*!
+			\param v12 the sum of four vectors of the electron and positron
+			\param v3 four vector for photon
+			\param psi12_3 the optimum psi from the the minimization of X^2
+			\return the photon constrained energy for Minimalist2
+			*/
+			double getX3constrainedMin2(TLorentzVector v12, TLorentzVector v3, double psi12_3);
 			
+			//add official comments
+			double sign(double param);
+			//add official comments
+			double bisection(double(*f)(double), double a, double b, double TOL, int N );
 			
 };
 #endif

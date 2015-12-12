@@ -46,4 +46,20 @@ cd ..
 
 cd scriptTools/Epi_SP
 make clean
+cd ../..
+
+cd scriptTools/Epi_initP
+make clean
+cd ../..
+
+cd scriptTools/Sigma_Psi123
+make clean
+cd ../..
+
+cd Minimalist
+make clean
+cd ..
+
+cd Minimalist2
+make clean
 cd ..
