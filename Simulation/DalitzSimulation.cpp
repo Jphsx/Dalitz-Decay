@@ -82,7 +82,9 @@ int main(int argc, char *argv[]){
 
 		
 		//makes an event for this iteration
+		
 		generator->createEvent(M,m_e,initial_p);
+		
 		//sets the particle struct array created in event generator to our local evtP pointer
 		 evtP = generator->arrPtr;
 		 generator->copyObject(evtP,evtP_actual);

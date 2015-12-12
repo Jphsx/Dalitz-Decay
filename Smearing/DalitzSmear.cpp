@@ -62,7 +62,7 @@ double DalitzSmear::getVectorMagnitude(double i, double j, double k){
 }
 //the directional smearing component of the system, this vector lies on a plane that is normal to the original generator level direction
 TVector3 DalitzSmear::getOmega_T(TVector3 v_1, TVector3 v_n){
-	double phi_t = RNG->Uniform(0,M_PI);
+	double phi_t = RNG->Uniform(0,2*M_PI);
 	TVector3 w_t = cos(phi_t)*v_1 + sin(phi_t)*v_n;
 	return w_t;
 }

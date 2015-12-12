@@ -65,10 +65,62 @@ double mathUtility::getX3constrained(double x1,double x2, pObject p1, pObject p2
 	double bottomterm = ( (getZ13(p1,p3)/(sin(p1.theta) * x1)) + (getZ23(p2,p3)/(sin(p2.theta) * x2)) );
 	return topterm/bottomterm;
 }
+double mathUtility::getX3constrainedMin2(pObject p1, pObject p2, pObject p3 ){
+		TLorentzVector v12 = p1.v + p2.v;
+		double Cosphi12 = getCosTheta(v12, p3.v);
+		double topterm = M*M -v12.M()*v12.M();
+		double bottomterm = 2*(v12.E() - v12.P()* Cosphi12);
+	return topterm/bottomterm; 
+		
+}
+//overloaded to calculate X3 with the supplied angle from the four vectors
+double mathUtility::getX3constrainedMin2(TLorentzVector v12, TLorentzVector v3){
+	double Cosphi12 = getCosTheta(v12,v3);
+	double topterm = M*M - v12.M()*v12.M();
+	double bottomterm = 2*(v12.E() - v12.P() * Cosphi12);
+	return topterm/bottomterm;
+}
+//overloaded to calculate X3 with a passed in opening angle between v12 and v3
+double mathUtility::getX3constrainedMin2(TLorentzVector v12, TLorentzVector v3, double psi12_3){
+	
+	double topterm = M*M - v12.M()*v12.M();
+	double bottomterm = 2*(v12.E() - v12.P() * cos(psi12_3));
+	return topterm/bottomterm;
+}
 //limits the domain to avoid floating point error
 double mathUtility::safeAcos(double x){
 	if (x < -1.0) x = -1.0 ;
 	else if (x > 1.0) x = 1.0 ;
 	return acos (x) ;
  }
+double mathUtility::sign(double param){
+	//std::cout<<"param :"<<param<<std::endl;	
+	if(param<0.0) return -1;
+	if(param>0.0) return 1;
+	if(param == 0) return 0;
+	
+}
+double mathUtility::bisection(double(*f)(double), double a, double b, double TOL, int N ){
+	int n = 1;
+	double sign_fa = sign( f(a) );
+
+	double halfLength, p, sign_fp;
+	
+	while( n <= N ){
+		 halfLength = (b-a)/2.0;
+		 p = a + halfLength;
+		//std::cout<<std::setprecision(15);
+		//std::cout<<"p_"<<n<<" = "<< p<<"  hl: "<<halfLength<<std::endl;
+		if(halfLength < TOL) return p;
+		
+		n++;
+		sign_fp = sign( f(p) );
+		if(sign_fp == 0.0) return p;
+		if(sign_fp*sign_fa > 0) a=p;
+		if(sign_fp*sign_fa < 0) b=p;
+		
+	}
+	std::cout<<"iterated over all N N (may not have converged)="<<N<<std::endl;
+	return p;
+}
 //int main(){}

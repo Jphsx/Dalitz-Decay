@@ -35,7 +35,7 @@ cd ..
 cd plotTools/ResultInterpreter
 
 #plot the pull distributions with this result interpreter program
-./hist ../../EventOutputs/EventResults.txt $Nevs
+./hist ../../EventOutputs/EventResults.txt $Nevs $initP ../../EventOutputs/ResultHistos.root
 
 #switch over to the histogramming class
 cd ..

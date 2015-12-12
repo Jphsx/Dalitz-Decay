@@ -167,7 +167,7 @@ int main(int argc, char* argv[]){
 	TH1D* hEfitSum = new TH1D("hEfitSum", "Energy Sum from Minimization E1+E2+E3;pi0 Energy;Event per bin",100,initP-0.5*initP,initP+0.5*initP);
 	TH1D* hESumConstrained = new TH1D("hESumConstrained", "Minimimalist E1+E2+E3C;pi0 Energy; event per bin",100,initP-0.5*initP,initP+0.5*initP);
 	
-	TH1D* hEpiPull = new TH1D("hEpiPull", "pull distribution of pi0 energies; Epi_fit - Epi_m / sqrt(vfit-vm); event per bin",100,-5,5);
+	TH1D* hEpiPull = new TH1D("hEpiPull", "pull distribution of pi0 energies; Epi_fit - Epi_m / sqrt(vfit-vm); event per bin",100,-0.5*initP,0.5*initP);
 	double EpiPull;
 
 	TH1D* hdpsix1 = new TH1D("hdpsix1","#delta#psi between generator and detector x1;Events per bin",100,-0.0,0.1);

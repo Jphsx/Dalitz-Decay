@@ -5,6 +5,7 @@
 #include "TGraph.h"
 #include "TCanvas.h"
 #include "TMultiGraph.h"
+#include "TLegend.h"
 
 using namespace std;
 int main(){
@@ -53,30 +54,42 @@ int main(){
 		TGraph *min = new TGraph(n,sp,minimalist);
 		TGraph *elim = new TGraph(n,sp,elimination);
 		
-		
+		mg->SetTitle("E_#pi^{0} RMS vs #sigma_sp;#sigma;RMS"); 
 		
 
 		//measured rms options
 		meas->SetMarkerStyle(21);
 		meas->SetMarkerColor(2);
 		meas->SetLineColor(4);
+		meas->SetTitle("Measured");
 		//meas->Draw("ACP");
 		
 		min->SetMarkerColor(4);
 		min->SetMarkerStyle(22);
 		min->SetLineColor(3);
+		min->SetTitle("Minimalist");
 		//min->Draw("CP");
 
 		elim->SetMarkerColor(3);
 		elim->SetMarkerStyle(3);
 		elim->SetLineColor(2);
+		elim->SetTitle("Elimination");
 		//elim->Draw("CP");
 
 		mg->Add(meas);
 		mg->Add(min);
 		mg->Add(elim);
 
+		
+		/*TLegend* legend = new TLegend(0.1,0.7,0.48,0.9);
+		legend->AddEntry("meas", "Measured");
+		legend->AddEntry("min", "Minimalist");
+		legend->AddEntry("elim", "Elimination");
+		//legend->Draw();
+		mg->Add(legend);*/
+
 		mg->Draw("ACP");
+		c1->BuildLegend();
 
 		c1->Print("E_PIrms_vs_sigma_sp.pdf");
 		
