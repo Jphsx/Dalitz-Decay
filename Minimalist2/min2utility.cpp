@@ -4,14 +4,14 @@
 min2utility::min2utility(double M,TLorentzVector v12, TLorentzVector v3){
 	//scaleParameterCP = sigma_sp;
 	//this value was calculated from the simulation in scriptTools/Sigma_Psi123/Psi123RMS.cpp
-	var_psi12_3 = 9.96779238e-05;
+	sigma_psi12_3 = 9.96779238e-05;
 	Mpi=M;
 	x12_u = v12;
 	x3_u = v3;
 }
 //secondary constructor, this needs you to use setvectors
 min2utility::min2utility(double M){
-	var_psi12_3 = 9.96779238e-05;
+	sigma_psi12_3 = 9.96779238e-05;
 	Mpi=M;
 }
 void min2utility::setVectors(TLorentzVector v12, TLorentzVector v3){
@@ -21,7 +21,11 @@ void min2utility::setVectors(TLorentzVector v12, TLorentzVector v3){
 double min2utility::getChiSqMin2(double Mpi, TLorentzVector v12, TLorentzVector v3, double psi123, double psi123m){
 	
 	 //edit constrained to take optimal psivalue
-	return pow( (mathUtility::getX3constrainedMin2(v12,v3,psi123) - v3.E())/(sqrt(mathUtility::getVariance(v3,22))),2) + pow( (psi123 - psi123m)/(var_psi12_3),2 );
+	//std::cout<<"e3c "<<mathUtility::getX3constrainedMin2(v12,v3,psi123)<<endl;
+	//std::cout<<"e3stdev "<<sqrt(mathUtility::getVariance(v3,22))<<endl;
+	//std::cout<<"e3var "<<mathUtility::getVariance(v3,22)<<endl;
+	
+	return pow( (mathUtility::getX3constrainedMin2(v12,v3,psi123) - v3.E())/(sqrt(mathUtility::getVariance(v3,22))),2) + pow( (psi123 - psi123m)/(sigma_psi12_3),2 );
 }
 //the deriviative of the X^2 equation with respect to psi12,3 (the value to be adjusted) this function is to be passed into bisection to find the 
 //optimal psi for X^2 minimization
@@ -33,7 +37,7 @@ double min2utility::Min2ChiPrime(double psi123){
 	double secondTerm = (E3cMin2 - x3_u.E());
 	double thirdTerm = mathUtility::getVariance(x3_u,22) * pow( (x12_u.E()- x12_u.P()*cos(psi123)), 2);
 	
-	double fourthTerm = (2*(psi123 - mathUtility::safeAcos(mathUtility::getCosTheta(x12_u,x3_u)))) / var_psi12_3;
+	double fourthTerm = (2*(psi123 - mathUtility::safeAcos(mathUtility::getCosTheta(x12_u,x3_u)))) / pow(sigma_psi12_3,2);
 	return (firstTerm*secondTerm)/thirdTerm + fourthTerm;
 }
 double min2utility::sign(double param){
@@ -44,8 +48,11 @@ double min2utility::sign(double param){
 	
 }
 //double min2utility::bisection(double min2utility::*f(double), double a, double b, double TOL, int N ){
-double min2utility::bisection(double a, double b, double TOL, int N){
-	
+//has some extra parameters for debugging
+//double min2utility::bisection(double a, double b, double TOL, int N,
+//TLorentzVector v12, TLorentzVector v3, double psi123m
+// ){
+double min2utility::bisection(double a, double b, double TOL, int N){	
 	int n = 1;
 	double sign_fa = sign( Min2ChiPrime(a) );
 
@@ -58,6 +65,8 @@ double min2utility::bisection(double a, double b, double TOL, int N){
 		 p = a + halfLength;
 		//std::cout<<std::setprecision(15);
 		//std::cout<<"p_"<<n<<" = "<< p<<"  hl: "<<halfLength<<std::endl;
+		//std::cout<< getChiSqMin2(0.13497, v12, v3, p, psi123m)<<endl<<endl;
+
 		if(halfLength < TOL) return p;
 		
 		n++;
@@ -76,6 +85,7 @@ double min2utility::MinimizeMin2(){
 	//we can search between 0 and pi because the opening angle is boundable on this interval
 	
 	return bisection(0,M_PI,1e-15,10000);
+
 }
 /*int main(){
 //the helper test framework, will look at 1 10GEV event, (10 GEV event #2) Actual & Smeared and test X^2 values and 
@@ -121,15 +131,17 @@ double min2utility::MinimizeMin2(){
 	//c1->Print("X2prime.pdf");
 
         f->Write();
-  
-	double bestguessPSI = test->MinimizeMin2();
+  	
+	//double bestguessPSI = test->MinimizeMin2();
 	double realPSI = mathUtility::safeAcos(mathUtility::getCosTheta(v12,  v3));
 	double measuredPSI = mathUtility::safeAcos(mathUtility::getCosTheta(v12sm,  v3sm));
 
+	double psidebug = test->bisection(0,M_PI,1e-15,10000, v12sm, v3sm, measuredPSI );
+
 	cout<<setprecision(9);
-	cout<<"bisection Psi: "<<bestguessPSI<<" real Psi: "<<realPSI<<endl;
-	cout<<"X^2 minimization: "<< test->getChiSqMin2(0.13497, v12sm, v3sm, bestguessPSI, measuredPSI);
-	cout<<" X^2 real psi: "<< test->getChiSqMin2(0.13497, v12sm, v3sm, realPSI, measuredPSI)<<endl;
+	//cout<<"bisection Psi: "<<bestguessPSI<<" real Psi: "<<realPSI<<endl;
+	//cout<<"X^2 minimization: "<< test->getChiSqMin2(0.13497, v12sm, v3sm, bestguessPSI, measuredPSI);
+	//cout<<" X^2 real psi: "<< test->getChiSqMin2(0.13497, v12sm, v3sm, realPSI, measuredPSI)<<endl;
 	
 	//f->Write();
 

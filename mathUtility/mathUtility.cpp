@@ -85,6 +85,7 @@ double mathUtility::getX3constrainedMin2(TLorentzVector v12, TLorentzVector v3, 
 	
 	double topterm = M*M - v12.M()*v12.M();
 	double bottomterm = 2*(v12.E() - v12.P() * cos(psi12_3));
+
 	return topterm/bottomterm;
 }
 //limits the domain to avoid floating point error
