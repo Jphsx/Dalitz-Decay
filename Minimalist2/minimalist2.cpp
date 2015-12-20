@@ -80,10 +80,10 @@ ofstream f("../EventOutputs/EventResults_Minimalist2.txt");
 			//debug constraint equations
 			debug<<"PSI12,3 Real: "<< mathUtility::safeAcos(mathUtility::getCosTheta(h->evtP_actual[1].v+h->evtP_actual[2].v,h->evtP_actual[3].v))<<" "
 			<<"PSI12,3 Meas: "<< mathUtility::safeAcos(mathUtility::getCosTheta(h->evtP[1].v+h->evtP[2].v,h->evtP[3].v))<<" "
-			<<"PSI12,3 Adjusted: "<< psi123est<<endl<<endl;
+			<<"PSI12,3 Adjusted: "<< psi123est<< " CHISQ = "<<chisq<<endl<<endl;
 			 debug <<"E3C: "<< E3constrainedM2 <<" "
 			<<"E1+E2+E3C: "<< h->evtP[1].v.E() + h->evtP[2].v.E() + E3constrainedM2 
-			<< "E1+E2+E3: " << h->evtP[1].v.E() + h->evtP[2].v.E() + h->evtP[3].v.E()<< endl<<endl;;
+			<< " E1+E2+E3: " << h->evtP[1].v.E() + h->evtP[2].v.E() + h->evtP[3].v.E()<< endl<<endl;;
 	//////////////////
 
 	//need to add to photon helper total differential

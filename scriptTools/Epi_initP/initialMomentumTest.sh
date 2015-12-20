@@ -44,7 +44,7 @@ do
 	echo "beginning minimization"
 	
 	cd Minimalist2
-	./min2 $Nevs $M $m_e $initP
+	./min2 $Nevs $M $m_e $initP 
 	echo "end min2"
 
 	cd ..
@@ -63,7 +63,9 @@ do
 	#plot the pull distributions with this result interpreter program
 	./hist ../../EventOutputs/EventResults_Minimalist.txt $Nevs $initP ../../EventOutputs/ResultHistos_Minimalist.root
 	./hist ../../EventOutputs/EventResults_Minimalist2.txt $Nevs $initP ../../EventOutputs/ResultHistos_Minimalist2.root	
-
+	echo "end plotting"
+	echo "begin scriptTool"
+	
 	cd ../../scriptTools/Epi_initP
 	##ADD CODE-------- (to rms and plot for minimalist 2)
 	# extract RMS from Epi0 plots (maybe write them to a file) then have a later script construct a histogram

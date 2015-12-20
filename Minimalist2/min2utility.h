@@ -31,13 +31,16 @@ class min2utility{
 	//sets the vectors so only 1 instance is needed in minimalist
 	void setVectors(TLorentzVector v12, TLorentzVector v3);
 	//static double bisection(double(min2utility::*f)(double), double a, double b, double TOL, int N );
+	//debugging bisection
+	//double bisection(double a, double b, double TOL, int N,TLorentzVector v12, TLorentzVector v3, double psi123m);
+
 	double bisection(double a, double b, double TOL, int N);
 	double sign(double param);
 	//NOTE: use mathutility to get x3constrainedMin2
 	
 	//variables to store locally v12, and v3?	
 	//double scaleParameterCP;
-	double var_psi12_3;
+	double sigma_psi12_3;
 	TLorentzVector x12_u;
 	TLorentzVector x3_u;
 	double Mpi;
