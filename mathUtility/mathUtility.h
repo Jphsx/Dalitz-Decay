@@ -137,5 +137,12 @@ namespace mathUtility {
 			//add official comments
 			double bisection(double(*f)(double), double a, double b, double TOL, int N );
 			
+			double getConstrainedMass(TLorentzVector v1, TLorentzVector v2, TLorentzVector v3);
+			double getConstrainedMass(TLorentzVector v12, TLorentzVector v3);
+			double getConstrainedMass(TLorentzVector v12,TLorentzVector v3, double E3C);
+			double getConstrainedMass(TLorentzVector v12, double E3C, double psi12_3);
+			
+
+			
 };
 #endif

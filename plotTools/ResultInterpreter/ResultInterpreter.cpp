@@ -28,7 +28,7 @@ void ResultInterpreter::makeHistos(int Nevs, ifstream& f1, double initP, const c
 	TH1D* hchisq = new TH1D("hchisq", " elimination #chi^{2}; #chi^{2}; Frequency",100,0,10);
 	TH1D* hchisqLarge = new TH1D("hchisqLarge","elimination #chi^{2};#chi^{2};Events Per bin",100,0,30);
 	TH1D* hchisqP = new TH1D("hchisqP", "probability of #chi^{2} from elimination;Probabilty;Events Per Bin",100,0,1);
-
+	//TH1D* hmass_m = new TH1D("hmass_m", "pi0 measured mass resolution; Mass; event per bin", 100, M-M,M+M);
 
 
 	if(f1.is_open()){

@@ -49,8 +49,8 @@ ofstream f("../EventOutputs/EventResults_Minimalist.txt");
 	double chisq;
 	double E3constrained;
 	double ESum_m;
-	TLorentzVector massV,vtest;
-	double mass;
+	
+	double massC,massM;
 
 	for(int i=0; i<N; i++){
 
@@ -98,14 +98,11 @@ ofstream f("../EventOutputs/EventResults_Minimalist.txt");
 		hESum->Fill(ESum_m);
 		hEminSum->Fill(h->evtP[1].v.E() + h->evtP[2].v.E() + E3constrained);
 		
-		massV = h->evtP[1].v+h->evtP[2].v+h->evtP[3].v;
-		hmass_m->Fill(massV.M());
-	
-		//vtest.SetPxPyPzE(E3constrained,0,0,E3constrained);
-		//massV = h->evtP[1].v +h->evtP[2].v + vtest;
-		mass =  sqrt( (pow(h->evtP[1].v.E()+h->evtP[2].v.E()+E3constrained,2)) - (pow(h->evtP[1].v.P()+h->evtP[2].v.P()+E3constrained,2)) );
-		//hmass_min->Fill(mass);
-		hmass_min->Fill(mass);	
+		massM = mathUtility::getConstrainedMass(h->evtP[1].v , h->evtP[2].v , h->evtP[3].v);
+		massC = mathUtility::getConstrainedMass(h->evtP[1].v + h->evtP[2].v, h->evtP[3].v, E3constrained);
+		
+		hmass_min->Fill(massC);	
+		hmass_m->Fill(massM);
 	}
 
 	//hEpiPull->Fill(  (ESum_m - (h->evtP[1].x_m + h->evtP[2].x_m +E3constrained))/(sqrt( // what is the epi0 variance??

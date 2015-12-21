@@ -88,6 +88,31 @@ double mathUtility::getX3constrainedMin2(TLorentzVector v12, TLorentzVector v3, 
 
 	return topterm/bottomterm;
 }
+//returns the invariant mass of the pion as a function of E:1,2,3 |P|:1,2,3 and psi:1,2,3
+double mathUtility::getConstrainedMass(TLorentzVector v1, TLorentzVector v2, TLorentzVector v3){
+	double cos_psi12 = getCosTheta(v1,v2);
+	double cos_psi13 = getCosTheta(v1,v3);
+	double cos_psi23 = getCosTheta(v2,v3);
+
+	return sqrt (v1.M()*v1.M() + v2.M()*v2.M() + 2*v1.E()*v2.E() + 2*v1.E()*v3.E() + 2*v2.E()*v3.E() - 2*v1.P()*v2.P()*cos_psi12 - 2*v1.P()*v3.P()*cos_psi13 - 2*v2.P()*v3.P()*cos_psi23 );
+
+}
+//returns the invariant mass of the pion as a function of E:12,3 |P|:12,3 and psi:12,3
+double mathUtility::getConstrainedMass(TLorentzVector v12, TLorentzVector v3){
+	double cos_psi12_3 = getCosTheta(v12,v3);
+
+	return sqrt (v12.M()*v12.M() + 2*v12.E()*v3.E() - 2*v12.P()*v3.P()*cos_psi12_3 );
+}
+//returns the invariant mass of the pion as a function of constrained photon energy (intended use for min1)
+double mathUtility::getConstrainedMass(TLorentzVector v12, TLorentzVector v3, double E3C){
+	double cos_psi12_3 = getCosTheta(v12,v3);
+	return sqrt (v12.M()*v12.M() + 2*v12.E()*E3C - 2*v12.P()*E3C*cos_psi12_3 );
+}
+//returns the invariant mass of the pion as a function of constrained photon energy and opening angle between photon and leptons
+double mathUtility::getConstrainedMass(TLorentzVector v12, double E3C, double psi12_3){
+	return sqrt (v12.M()*v12.M() + 2*v12.E()*E3C - 2*v12.P()*E3C*cos(psi12_3) );
+}
+
 //limits the domain to avoid floating point error
 double mathUtility::safeAcos(double x){
 	if (x < -1.0) x = -1.0 ;

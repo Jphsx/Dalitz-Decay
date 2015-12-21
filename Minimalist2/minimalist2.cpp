@@ -30,6 +30,8 @@ TH1D* hESum = new TH1D("hESum", "Measured pi0 Energy E1+E2+E3; GEV; Event Per Bi
 TH1D* hEmin2Sum = new TH1D("hEmin2Sum", "Minimalist pi0 Energy E1+E2+ E3(x12); GEV; Event Per Bin", 500, initP-3.5*initP,initP+3.5*initP);
 TH1D* hEpiPull = new TH1D("hEpiPull", "pull distribution of pi0 energies; pull value; event per bin",100,-0.5*initP,0.5*initP);
 
+TH1D* hmass_min2 = new TH1D("hmass_min2", "pi0 minimalist2 mass resolution; Mass; event per bin", 100, M-M, M+M);
+TH1D* hmass_m = new TH1D("hmass_m", "pi0 measured mass resolution; Mass; event per bin", 100, M-M,M+M);
 
 //DEBUGGING
 ofstream debug("../EventOutputs/Event_min2_debug.txt");
@@ -49,6 +51,7 @@ ofstream f("../EventOutputs/EventResults_Minimalist2.txt");
 	double E3constrainedM2;
 	double ESum_m;
 	double psi123est;
+	double massC,massM;
 	//TLorentzVector v12;
 	min2utility* min2helper = new min2utility( M );
 	for(int i=0; i<N; i++){
@@ -106,6 +109,11 @@ ofstream f("../EventOutputs/EventResults_Minimalist2.txt");
 		hESum->Fill(ESum_m);
 		hEmin2Sum->Fill(h->evtP[1].v.E() + h->evtP[2].v.E() + E3constrainedM2);
 	
+		massM = mathUtility::getConstrainedMass(h->evtP[1].v , h->evtP[2].v , h->evtP[3].v);		
+		hmass_m->Fill(massM);		
+
+		massC = mathUtility::getConstrainedMass(h->evtP[1].v + h->evtP[2].v , E3constrainedM2, psi123est);
+		hmass_min2->Fill(massC);
 
 	}
 	froot->Write();
