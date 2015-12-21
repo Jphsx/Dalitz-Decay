@@ -38,7 +38,14 @@ make clean
 make
 cd ..
 
+cd Mpi_initP
+make clean
+make
+cd ..
+
 cd Sigma_Psi123
 make clean
 make
 cd ../.. 
+
+

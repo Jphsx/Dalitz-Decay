@@ -56,6 +56,10 @@ cd scriptTools/Sigma_Psi123
 make clean
 cd ../..
 
+cd scriptTools/Mpi_initP
+make clean
+cd ../..
+
 cd Minimalist
 make clean
 cd ..
