@@ -7,6 +7,9 @@ vectorFactory::vectorFactory(double nu){
 vectorFactory::vectorFactory(double nu, const char* CMfilepath){
 	gen = new eventGenerator(nu,CMfilepath);
 }
+vectorFactory::vectorFactory(double nu, const char* CMfilepath, int seed){
+	gen = new eventGenerator(nu,CMfilepath,seed);
+}
 //reads a hepevt file from a specified path then builds the particle struct package and stores locally
 void vectorFactory::readVector(const char* path){
 	//this method can only be used to read a single event (it is redefined in minhelper) and is deprecated with N events

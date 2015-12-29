@@ -66,6 +66,14 @@ class vectorFactory{
 		\param CMfilepath the filepath designated for eventGenerator to output CM events into
 	*/
 	vectorFactory(double nu, const char* CMfilepath);
+
+	//! Constructor used for generating N events and creating a output .hepevt file which contains the CM events, uses a externally defined seed for eventGenerator
+	/*!
+		\param nu 2m_e/M which the square is used as the bottom boundary for generating x,y values with the Monte Carlo rejection method
+		\param CMfilepath the filepath designated for eventGenerator to output CM events into
+		\param seed the seed for the RNG object in eventGenerator and XYgenerator
+	*/
+	vectorFactory(double nu, const char* CMfilepath, int seed);
 	
 
 	//struct population functions

@@ -7,8 +7,8 @@ stepSize="1"
 
 M="0.13497"
 m_e="0.000511"
-initP="5"
-maxP="15"
+initP="1"
+maxP="150"
 seed='0'
 
 #testing for minimalist 2

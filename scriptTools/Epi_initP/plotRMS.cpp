@@ -70,7 +70,9 @@ int main(){
 		TGraph *min = new TGraph(n,inp,minimalist);
 		TGraph *min2 = new TGraph(n,inp,minimalist2);
 		//TGraph *elim = new TGraph(n,inp,elimination);
-		
+		meas->SetName("meas");
+		min->SetName("min");
+		min2->SetName("min2");
 		
 		
 
