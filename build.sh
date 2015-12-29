@@ -15,7 +15,7 @@ cd Histogrammar
 make clean
 make
 
-cd ..
+cd ../..
 cd Minimalist
 make clean
 make
