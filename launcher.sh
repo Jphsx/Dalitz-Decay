@@ -14,6 +14,9 @@ US_LABplot="1" #mode 1 plots unsmeared Lab event
 SM_LABplot="2" #mode 2 plots smeared Lab event
 #if one of the histogramming programs is unnecessary, set variable to -1
 
+#seed to control the RNG objects in the simulation
+seed="0" #0 defaults to a random seed based on TRandom1
+
 #run the simulation to create the event files: CM, unsmeared, and smeared .hepevt
 echo "beginning simulation"
 #this pipes output from sim into log for debugging

@@ -37,6 +37,14 @@ class eventGenerator{
 			\param CMfilename the string path used for the filestream to output CM events in the generateEvent() method
 		*/
 		eventGenerator(double nu, const char* CMfilename);
+
+		//! Constructor to initialize all local class members such as the random number generator and Monte Carlo x,y generator, this constructor is used specifically to supply the class with a filepath output CM events into as well as a seed for xy generation and event generation
+		/*!
+			\param nu 2m_e/M where nu^2 is the bottom boundary for the parameter x (nu used in the constructor argument of XY generator, this constructor is also a pass through)
+			\param CMfilename the string path used for the filestream to output CM events in the generateEvent() method
+			\param seed the seed to be used for TRandom1 which is the RNG object for xygenerator and event generator
+		*/
+		eventGenerator(double nu, const char* CMfilename, int seed);
 		
 
 	private:

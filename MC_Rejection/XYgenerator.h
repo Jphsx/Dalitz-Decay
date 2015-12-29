@@ -19,6 +19,12 @@ class XYgenerator{
 			\param bound or nu=2m_e/M and defines the boundary such that nu^2<x<1
 		*/
 		XYgenerator(double bound);
+
+		//! Constructor that utilizes an external random number generator and sets the global bottom boundary for the x value
+		/*!
+			\param bound or nu=2m_e/M and defines the boundary such that nu^2<x<1
+		*/
+		XYgenerator(double bound, TRandom1* rng);
 		
 	private:
 		//! Calculates and provides the beta values intended for y such that -beta<y<beta based on a pregenerated x value

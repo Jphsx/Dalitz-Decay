@@ -7,8 +7,9 @@ stepSize="1"
 
 M="0.13497"
 m_e="0.000511"
-initP="1"
-maxP="75"
+initP="5"
+maxP="15"
+seed='0'
 
 #testing for minimalist 2
 #stepSize="2"
@@ -24,6 +25,7 @@ chiCont="0" #0:false 1:True
 
 rm RMSmin.txt #delete the old rms file so data doesnt get appended to it
 rm RMSmin2.txt
+rm RMSmeas.txt
 #move up into the main directory
 cd ../..
 cd EventOutputs
@@ -38,7 +40,9 @@ do
 	echo "beginning simulation"
 	#this pipes output from sim into log for debugging
 	#./sim $Nevs $M $m_e $initP $chiCont > EventOutputs/log.txt
-	./sim $Nevs $M $m_e $initP $chiCont $scaleParameterNP
+
+	seed=$initP
+	./sim $Nevs $M $m_e $initP $chiCont $scaleParameterNP $seed
 
 	echo "simulation complete"
 	echo "beginning minimization"
