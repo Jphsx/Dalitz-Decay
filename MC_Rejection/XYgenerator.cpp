@@ -6,6 +6,11 @@ XYgenerator::XYgenerator(double bound){
 	nu=bound;
 	RNG = new TRandom1();
 }
+XYgenerator::XYgenerator(double bound, TRandom1* rng){
+	WMAX = 9000;
+	nu = bound;
+	RNG = rng;
+}
 //returns the Beta value based on a given x randomly generated.  used to determine the boundary conditions for -Beta<y<Beta
 double XYgenerator::getBeta(double x){
 	return sqrt(1 - (nu*nu/x));

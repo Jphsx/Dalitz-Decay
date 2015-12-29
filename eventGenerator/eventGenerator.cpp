@@ -15,6 +15,15 @@ eventGenerator::eventGenerator(double nu, const char* CMfilename){
 	CMwrite=true;
 	CMfs.open(CMfilename);
 }
+//contructor that uses the RNG object on xygeneration and has a seed dictated by input value
+eventGenerator::eventGenerator(double nu, const char* CMfilename, int seed){
+	RNG = new TRandom1();
+	RNG->SetSeed(seed);
+	XYgenerator* temp = new XYgenerator(nu,RNG);
+	xygen = temp;
+	CMwrite = true;
+	CMfs.open(CMfilename);
+}
 // uses XY generator to get the x and y values then generates the three particles in the event, rotates the system about all three axes then boosts the particles into the lab frame
 TLorentzVector* eventGenerator::generateEvent( double M, double m_e, double initial_p){
 	double* xy = xygen->generateXYpair();

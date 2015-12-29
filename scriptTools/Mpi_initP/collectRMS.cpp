@@ -32,7 +32,7 @@ TFile *f_2 = new TFile("../../EventOutputs/ResultHistos_Minimalist2.root");
 
 	//get the minimimalist stuff
 	TH1D * minRMS = (TH1D*)f->Get("hmass_min");
-	TH1D * measRMS = (TH1D*)f->Get("hmass_m");
+	TH1D * measRMS = (TH1D*)f_2->Get("hmass_m");
 	TH1D * min2RMS = (TH1D*)f_2->Get("hmass_min2");
 
 	double min = minRMS->GetRMS();
@@ -42,17 +42,23 @@ TFile *f_2 = new TFile("../../EventOutputs/ResultHistos_Minimalist2.root");
 	
 	std::ofstream f1;
 	std::ofstream f2;
+	std::ofstream f3;
 	f1.open("RMSmin.txt", std::ofstream::out | std::ofstream::app);
 	f2.open("RMSmin2.txt", std::ofstream::out | std::ofstream::app);
+	
+	f3.open("RMSmeas.txt", std::ofstream::out | std::ofstream::app);
+
 	f1<<std::setprecision(9);
 	f2<<std::setprecision(9);
-	
+	f3<<std::setprecision(9);
 	//f1<<meas<<" "<<min<<" "<<elim<<" "<<initP<<std::endl;
 	f1<<meas<<" "<<min<<" "<<initP<<std::endl;
 	f2<<meas<<" "<<min2<<" "<<initP<<std::endl;
+	f3<<meas<<" "<<initP<<std::endl;
 
 	f1.close();
 	f2.close();
+	f3.close();
 	
 	return 0;
 

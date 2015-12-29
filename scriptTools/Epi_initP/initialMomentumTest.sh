@@ -9,6 +9,7 @@ M="0.13497"
 m_e="0.000511"
 initP="1"
 maxP="75"
+seed="0"
 
 #testing for minimalist 2
 #stepSize="2"
@@ -38,7 +39,8 @@ do
 	echo "beginning simulation"
 	#this pipes output from sim into log for debugging
 	#./sim $Nevs $M $m_e $initP $chiCont > EventOutputs/log.txt
-	./sim $Nevs $M $m_e $initP $chiCont $scaleParameterNP
+seed=$initP
+	./sim $Nevs $M $m_e $initP $chiCont $scaleParameterNP $seed
 
 	echo "simulation complete"
 	echo "beginning minimization"

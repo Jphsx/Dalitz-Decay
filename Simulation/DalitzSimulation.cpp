@@ -34,6 +34,7 @@ int main(int argc, char *argv[]){
 	double initial_p = atof(argv[4]);
 	int chiCont = atoi(argv[5]);
 	double scaleParameterNP = atof(argv[6]);
+	int seed = atoi(argv[7]);
 	
 
 
@@ -50,7 +51,7 @@ int main(int argc, char *argv[]){
 	
 	
 	//print to screen the arguments input to the simulation
-	cout<<"ARGS "<<N<<" "<<M<<" "<<m_e<<" "<<initial_p<<endl;
+	cout<<"ARGS "<<N<<" "<<M<<" "<<m_e<<" "<<initial_p<<" "<<seed<<endl;
 
 	//each time the simulation is run the .hepevt files are wiped for reuse
 	ofstream cleaner("EventOutputs/DalitzActualVectors.hepevt");
@@ -71,7 +72,7 @@ int main(int argc, char *argv[]){
 
 	//begin simulation loop
 	//instansiate vectorfactory to create an event for the simulation and give it the filepath for CM events to pass through to event generator
-	vectorFactory* generator =  new vectorFactory(2*m_e/M, "EventOutputs/DalitzCMVectors.hepevt");
+	vectorFactory* generator =  new vectorFactory(2*m_e/M, "EventOutputs/DalitzCMVectors.hepevt",seed);
 	//local particle struct array for the event to be generated
 	vectorFactory::ParticleParameters* evtP;
 	vectorFactory::ParticleParameters* evtP_actual;
