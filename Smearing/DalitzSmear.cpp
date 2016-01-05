@@ -36,6 +36,11 @@ void DalitzSmear::setScaleParameterNP(double sigma){
 void DalitzSmear::setScaleParameterCP(double sigma){
 	scaleParameterCP=sigma;
 }
+//sets the scale parameter based on energy of the particle
+void DalitzSmear::setScaleParameterNP(TLorentzVector v){
+	//scaleParameterCP = 0.001 / sqrt(v.E());
+	scaleParameterNP = 0.001 / sqrt(v.E());
+}
 double DalitzSmear::getPtsm(TLorentzVector v){
 	if(pid == 11 || pid == -11){
 		return 1/ getGauss(v);	

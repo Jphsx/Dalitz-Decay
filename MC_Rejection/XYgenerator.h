@@ -26,7 +26,7 @@ class XYgenerator{
 		*/
 		XYgenerator(double bound, TRandom1* rng);
 		
-	private:
+	
 		//! Calculates and provides the beta values intended for y such that -beta<y<beta based on a pregenerated x value
 		/*!
 			\param x the invariant dielectric mass

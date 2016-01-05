@@ -61,6 +61,9 @@ ofstream f("../EventOutputs/EventResults_Minimalist2.txt");
 		h->populateParticles(h->f2,h->factory2,h->evtP_actual);
 	min2helper->setVectors(h->evtP[1].v+h->evtP[2].v, h->evtP[3].v);
 		//use bisection on the X^2 derivative, the zero is the optimal opening angle such that X^2 is minimized
+		//first set the sigma of opening angle since it is now 1mrad/rootE
+		
+		min2helper->setSigma_psi12_3(.001/sqrt(h->evtP[3].v.E()));
 		psi123est=min2helper->MinimizeMin2();
 
 		E3constrainedM2 = mathUtility::getX3constrainedMin2(h->evtP[1].v+h->evtP[2].v,h->evtP[3].v, psi123est);

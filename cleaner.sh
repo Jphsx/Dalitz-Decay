@@ -60,6 +60,14 @@ cd scriptTools/Mpi_initP
 make clean
 cd ../..
 
+cd scriptTools/Mpi_thetaStar
+make clean
+cd ../..
+
+cd scriptTools/XY_surf
+make clean
+cd ../..
+
 cd Minimalist
 make clean
 cd ..

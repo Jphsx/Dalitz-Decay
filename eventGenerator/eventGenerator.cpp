@@ -36,9 +36,10 @@ TLorentzVector* eventGenerator::generateEvent( double M, double m_e, double init
 		if(i == 3) evtP[i]=makePhoton(xy[0],M);
 	}
 	/////////////////Must add function to write rotated CM events to output file////////////////////////////////
-	if(CMwrite) writeEvent(CMfs,evtP);
+	//if(CMwrite) writeEvent(CMfs,evtP);
 	//rotate and boost
 	rotateSystem(evtP);
+	if(CMwrite) writeEvent(CMfs,evtP);
 	boostToLab(evtP, initial_p, M);
 	//returns pointer to 4 vector array
 	return evtP;

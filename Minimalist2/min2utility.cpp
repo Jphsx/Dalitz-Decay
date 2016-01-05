@@ -1,18 +1,23 @@
 
 #include "min2utility.h"
 
+//sigma_psi12_3 must be set for every time program is run
 min2utility::min2utility(double M,TLorentzVector v12, TLorentzVector v3){
 	//scaleParameterCP = sigma_sp;
 	//this value was calculated from the simulation in scriptTools/Sigma_Psi123/Psi123RMS.cpp
-	sigma_psi12_3 = 9.96779238e-05;
+	//sigma_psi12_3 = 9.96779238e-05;
 	Mpi=M;
 	x12_u = v12;
 	x3_u = v3;
 }
 //secondary constructor, this needs you to use setvectors
 min2utility::min2utility(double M){
-	sigma_psi12_3 = 9.96779238e-05;
+	
+	//sigma_psi12_3 = 9.96779238e-05;
 	Mpi=M;
+}
+void min2utility::setSigma_psi12_3(double sigma){
+	sigma_psi12_3 = sigma;
 }
 void min2utility::setVectors(TLorentzVector v12, TLorentzVector v3){
 	x12_u = v12;
