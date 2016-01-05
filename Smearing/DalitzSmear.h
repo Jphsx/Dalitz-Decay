@@ -65,7 +65,9 @@ class DalitzSmear{
 	void setScaleParameterNP(double sigma);
 	//! method to set the scale parameter for charged particle i.e. positron/electron, default value is 1e-6
 	void setScaleParameterCP(double sigma);
-		
+	
+	//! method to set the scale parameter for a given particle with energy E, 1mrad / sqrt(E)
+	void setScaleParameterNP(TLorentzVector v);	
 		
 	private://not for access by other classes local calculations only
 		//! Function that returns the smeared values for Pt, which is used for smearing each component of the v_reg vector

@@ -34,6 +34,8 @@ class min2utility{
 	//debugging bisection
 	//double bisection(double a, double b, double TOL, int N,TLorentzVector v12, TLorentzVector v3, double psi123m);
 
+	void setSigma_psi12_3(double sigma);
+
 	double bisection(double a, double b, double TOL, int N);
 	double sign(double param);
 	//NOTE: use mathutility to get x3constrainedMin2

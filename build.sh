@@ -43,6 +43,16 @@ make clean
 make
 cd ..
 
+cd Mpi_thetaStar
+make clean
+make
+cd ..
+
+cd XY_surf
+make clean
+make 
+cd ..
+
 cd Sigma_Psi123
 make clean
 make

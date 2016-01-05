@@ -6,7 +6,15 @@ CC=g++
 #all : NumericalMinimization.cpp
 #	$(CC) NumericalMinimization.cpp -o mins $(LIBS) $(CFLAGS)
 
-all: angle
+all : boost
+
+boost: boostTest.o
+	$(CC) boostTest.o -o boostTest $(LIBS)
+
+boostTest.o: boostTest.cpp
+	$(CC) boostTest.cpp $(CFLAGS)
+
+#all: angle
 
 angle: Psi123RMS.o vectorFactory.o mathUtility.o eventGenerator.o XYgenerator.o DalitzSmear.o
 	g++ Psi123RMS.o vectorFactory.o mathUtility.o eventGenerator.o XYgenerator.o DalitzSmear.o -o angle $(LIBS) 

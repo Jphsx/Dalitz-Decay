@@ -9,6 +9,8 @@
 using namespace std;
 int main(){
 
+	
+
 		std::vector<double> RMSmeas;
 		std::vector<double> RMSmin;
 		//std::vector<double> RMSelim;
@@ -51,7 +53,7 @@ int main(){
 		}
 		int n = RMSmeas.size();
 
-		double measured[n], minimalist[n], elimination[n], inp[n], minimalist2[n];
+		double measured[n], minimalist[n], elimination[n], inp[n], minimalist2[n], err_min[n], err_min2[n];
 
 		//copy to double arrays because it would be too convenient to use vectors with root
 		for(int i=0; i<n; i++){
@@ -60,6 +62,7 @@ int main(){
 			//elimination[i] = RMSelim[i];
 			minimalist2[i] = RMSmin2[i];
 			inp[i] = initP[i];
+			//err_min[i] = RMSmin[i]/
 		}
 
 		TCanvas *c1 = new TCanvas("c1","Epi RMS vs initial momentum",200,10,800,600);
@@ -81,7 +84,7 @@ int main(){
 		meas->SetMarkerStyle(21);
 		meas->SetMarkerColor(2);
 		meas->SetLineColor(4);
-		meas->Draw("ACP");
+		meas->Draw("AP");
 
 		//meas->GetXaxis()->SetTitle("GEV");
 		//meas->GetYaxis()->SetTitle("RMS");
@@ -89,7 +92,7 @@ int main(){
 		min->SetMarkerColor(4);
 		min->SetMarkerStyle(22);
 		min->SetLineColor(3);
-		min->Draw("CP");
+		min->Draw("P");
 
 		//elim->SetMarkerColor(3);
 		//elim->SetMarkerStyle(3);
@@ -99,7 +102,7 @@ int main(){
 		min2->SetMarkerColor(5);
 		min2->SetMarkerStyle(20);
 		min2->SetLineColor(5);
-		min2->Draw("CP");
+		min2->Draw("P");
 
 		TLegend* legend = new TLegend(0.1,0.7,0.48,0.9);
 		legend->AddEntry("meas", "Measured", "p");

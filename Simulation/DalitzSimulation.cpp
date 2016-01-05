@@ -102,10 +102,11 @@ int main(int argc, char *argv[]){
 
 		//instance of Smearing class to smear the raw event
 		DalitzSmear* corruptor = new DalitzSmear();
+		//#note scale parameter arg is currently deprecated, the scale parameter is now based on the energy of the particle
 		//if the directional smearing is not using the default parameters, set them according to input args
-		if(scaleParameterNP != 0){ 
-			corruptor->setScaleParameterNP(scaleParameterNP);
-		}
+		//if(scaleParameterNP != 0){ 
+		//	corruptor->setScaleParameterNP(scaleParameterNP);
+		//}
 		//iterate over the particles in the event array, smear each one and then update the particle struct parameters
 
 		//temp lorentz vector to throw out bad direction smears where somehow the dot product between generator and detector 4 vectors <0
@@ -115,8 +116,9 @@ int main(int argc, char *argv[]){
 
 	
 			corruptor->setpid(evtP[i].pID);
+			corruptor->setScaleParameterNP(evtP[i].v);
+			corruptor->setScaleParameterCP(1e-6);			
 
-			
 			magTemp = corruptor->SmearVector(evtP[i].v);
 			while(mathUtility::getCosTheta(magTemp,evtP[i].v)<0.0){
 			//if cos(theta) between the generator and magnitude smeared vector is <0 then the smearing created a anitparallel vector
